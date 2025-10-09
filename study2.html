@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study & Prayer Hub | Nooh Zidan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #8A2BE2;
+            --secondary: #1E1E2E;
+            --accent: #00BFFF;
+            --text: #E6E6FA;
+            --dark: #121212;
+            --prayer-green: #506A1B;
+            --prayer-light-green: #6E9226;
+            --prayer-dark-green: #3A4E13;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        /* Main Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .panel {
+            background: rgba(30, 30, 46, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            animation: fadeInUp 1s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.2);
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-title i {
+            color: var(--primary);
+        }
+
+        /* Prayer Times Section */
+        .prayer-container {
+            background: rgba(80, 106, 27, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(110, 146, 38, 0.3);
+        }
+
+        .prayer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .prayer-title {
+            font-size: 1.5rem;
+            color: var(--prayer-light-green);
+        }
+
+        .location {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .prayer-times {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .prayer-time {
+            background: rgba(110, 146, 38, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .prayer-time:hover {
+            background: rgba(110, 146, 38, 0.4);
+            transform: scale(1.05);
+        }
+
+        .prayer-name {
+            font-size: 1.1rem;
+            color: var(--prayer-light-green);
+            margin-bottom: 5px;
+        }
+
+        .prayer-hour {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* Timer Section */
+        .timer-display {
+            font-size: 4rem;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 300;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Task List */
+        .task-input {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .task-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .task-input button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .task-input button:hover {
+            background: var(--accent);
+        }
+
+        .task-list {
+            list-style: none;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease;
+        }
+
+        .task-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .task-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .task-checkbox {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .task-checkbox.checked {
+            background: var(--primary);
+        }
+
+        .task-checkbox.checked::after {
+            content: "✓";
+            color: white;
+            font-size: 12px;
+        }
+
+        /* Resources */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* Quotes */
+        .quote-container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(138, 43, 226, 0.1);
+            border-radius: 15px;
+            margin-top: 30px;
+            animation: fadeIn 2s ease;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .quote-author {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(138, 43, 226, 0.3);
+            opacity: 0.7;
+        }
+
+        /* Rain Animation */
+        .rain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .raindrop {
+            position: absolute;
+            top: -20px;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, var(--accent));
+            animation: rain linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes rain {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .prayer-times {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Rain Animation -->
+    <div class="rain-container" id="rainContainer"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">Study & Prayer Hub</h1>
+            <p class="tagline">مرحباً في مركز الدراسة والعبادة - Your perfect companion for productive study sessions</p>
+        </header>
+
+        <div class="dashboard">
+            <!-- Prayer Times Panel -->
+            <div class="panel">
+                <h2 class="panel-title"><i class="fas fa-mosque"></i> مواقيت الصلاة</h2>
+                <div class="prayer-container">
+                    <div class="prayer-header">
+                        <h3 class="prayer-title">اليوم</h3>
+                        <div class="location">دمليج، مصر</div>
+                    </div>
+                    <div class="prayer-times">
+                        <div class="prayer-time">
+                            <div class="prayer-name">الفجر</div>
+                            <div class="prayer-hour">4:45 ص</div>
+                        </div>
+                        <div class="prayer-time">
+                            <div class="prayer-name">الشروق</div>
+                            <div class="prayer-hour">6:12 ص</div>
+                        </div>
+                        <div class="prayer-time">
+                            <div class="prayer-name">الظهر</div>
+                            <div class="prayer-hour">12:05 م</div>
+                        </div>
+                        <div class="prayer-time">
+                            <div class="prayer-name">العصر</div>
+                            <div class="prayer-hour">3:25 م</div>
+                        </div>
+                        <div class="prayer-time">
+                            <div class="prayer-name">المغرب</div>
+                            <div class="prayer-hour">6:05 م</div>
+                        </div>
+                        <div class="prayer-time">
+                            <div class="prayer-name">العشاء</div>
+                            <div class="prayer-hour">7:32 م</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-compass"></i></div>
+                        <h3>إتجاه القبلة</h3>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-moon"></i></div>
+                        <h3>القمر اليوم</h3>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-calendar"></i></div>
+                        <h3>التاريخ الهجري</h3>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-pray"></i></div>
+                        <h3>الأذكار</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timer Panel -->
+            <div class="panel">
+                <h2 class="panel-title"><i class="fas fa-clock"></i> Focus Timer</h2>
+                <div class="timer-display" id="timer">25:00</div>
+                <div class="timer-controls">
+                    <button class="btn" id="startTimer"><i class="fas fa-play"></i> Start</button>
+                    <button class="btn" id="pauseTimer"><i class="fas fa-pause"></i> Pause</button>
+                    <button class="btn" id="resetTimer"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+            </div>
+
+            <!-- Task Panel -->
+            <div class="panel">
+                <h2 class="panel-title"><i class="fas fa-tasks"></i> Study Tasks</h2>
+                <div class="task-input">
+                    <input type="text" id="taskInput" placeholder="Add a new task...">
+                    <button id="addTask"><i class="fas fa-plus"></i></button>
+                </div>
+                <ul class="task-list" id="taskList">
+                    <!-- Tasks will be added here dynamically -->
+                </ul>
+            </div>
+
+            <!-- Resources Panel -->
+            <div class="panel">
+                <h2 class="panel-title"><i class="fas fa-book"></i> Quick Resources</h2>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-calculator"></i></div>
+                        <h3>Math Formulas</h3>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-language"></i></div>
+                        <h3>Vocabulary</h3>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-flask"></i></div>
+                        <h3>Science Notes</h3>
+                    </div>
+                    <div class="resource-card">
+                        <div class="resource-icon"><i class="fas fa-history"></i></div>
+                        <h3>History Dates</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-container">
+            <p class="quote-text" id="quote">"The expert in anything was once a beginner."</p>
+            <p class="quote-author" id="author">- Helen Hayes</p>
+        </div>
+
+        <footer>
+            <p>Study & Prayer Hub • Created by Nooh Zidan • noohzidan.github.io</p>
+        </footer>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timerInterval;
+        let timerRunning = false;
+        let timerTime = 25 * 60; // 25 minutes in seconds
+        
+        const timerDisplay = document.getElementById('timer');
+        const startBtn = document.getElementById('startTimer');
+        const pauseBtn = document.getElementById('pauseTimer');
+        const resetBtn = document.getElementById('resetTimer');
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timerTime / 60);
+            const seconds = timerTime % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function startTimer() {
+            if (!timerRunning) {
+                timerRunning = true;
+                timerInterval = setInterval(() => {
+                    if (timerTime > 0) {
+                        timerTime--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        timerRunning = false;
+                        // Timer completed - could add a notification here
+                    }
+                }, 1000);
+            }
+        }
+        
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+        }
+        
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            timerTime = 25 * 60;
+            updateTimerDisplay();
+        }
+        
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        
+        // Task list functionality
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTask');
+        const taskList = document.getElementById('taskList');
+        
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                const taskItem = document.createElement('li');
+                taskItem.className = 'task-item';
+                
+                const checkbox = document.createElement('div');
+                checkbox.className = 'task-checkbox';
+                
+                const taskContent = document.createElement('span');
+                taskContent.textContent = taskText;
+                
+                taskItem.appendChild(checkbox);
+                taskItem.appendChild(taskContent);
+                taskList.appendChild(taskItem);
+                
+                taskInput.value = '';
+                
+                // Add click event to toggle completion
+                checkbox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    taskItem.classList.toggle('completed');
+                });
+            }
+        }
+        
+        addTaskBtn.addEventListener('click', addTask);
+        taskInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+        
+        // Motivational quotes
+        const quotes = [
+            { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+            { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+            { text: "The expert in anything was once a beginner.", author: "Helen Hayes" },
+            { text: "Quality is not an act, it is a habit.", author: "Aristotle" },
+            { text: "The harder you work for something, the greater you'll feel when you achieve it.", author: "Unknown" },
+            { text: "Success is the sum of small efforts, repeated day in and day out.", author: "Robert Collier" }
+        ];
+        
+        const quoteElement = document.getElementById('quote');
+        const authorElement = document.getElementById('author');
+        
+        function changeQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteElement.textContent = `"${quotes[randomIndex].text}"`;
+            authorElement.textContent = `- ${quotes[randomIndex].author}`;
+            
+            // Add fade effect
+            quoteElement.style.opacity = 0;
+            authorElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                quoteElement.style.opacity = 1;
+                authorElement.style.opacity = 1;
+            }, 500);
+        }
+        
+        // Change quote every 30 seconds
+        setInterval(changeQuote, 30000);
+        
+        // Initialize with a random quote
+        changeQuote();
+        updateTimerDisplay();
+        
+        // Rain animation
+        function createRain() {
+            const rainContainer = document.getElementById('rainContainer');
+            const raindropCount = 100;
+            
+            for (let i = 0; i < raindropCount; i++) {
+                const raindrop = document.createElement('div');
+                raindrop.className = 'raindrop';
+                
+                // Random position and animation duration
+                const left = Math.random() * 100;
+                const animationDuration = 1 + Math.random() * 2;
+                const animationDelay = Math.random() * 5;
+                
+                raindrop.style.left = `${left}%`;
+                raindrop.style.animationDuration = `${animationDuration}s`;
+                raindrop.style.animationDelay = `${animationDelay}s`;
+                
+                rainContainer.appendChild(raindrop);
+            }
+        }
+        
+        // Initialize rain animation
+        createRain();
+        
+        // Add some sample tasks
+        const sampleTasks = [
+            "Complete math assignment",
+            "Read chapter 5 of textbook",
+            "Review lecture notes",
+            "Prepare for upcoming test"
+        ];
+        
+        // Uncomment the following lines if you want sample tasks to appear on load
+        // sampleTasks.forEach(task => {
+        //     taskInput.value = task;
+        //     addTask();
+        // });
+    </script>
+</body>
+</html>
