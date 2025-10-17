@@ -10,12 +10,7 @@
     <!-- Test reflected XSS -->
     <script>
         // Get URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const testParam = urlParams.get('test');
-        
-        if (testParam) {
-            document.write('<div>Reflected: ' + testParam + '</div>');
-        }
+      alert(34)
     </script>
 
     <!-- Test DOM XSS -->
