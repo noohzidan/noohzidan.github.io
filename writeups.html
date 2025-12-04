@@ -1,0 +1,281 @@
+<!-- writeups.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writeups | Nooh Zidan</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">Nooh<span>Zidan</span></div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="writeups.html" class="active">Writeups</a></li>
+                <li><a href="notion.html">Notion</a></li>
+                <li><a href="studying.html">Studying</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="terminal" style="margin-bottom: 2rem;">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+                <div class="terminal-title">nooh@writeups:~$</div>
+            </div>
+            <div class="terminal-content">
+                <p><span class="prompt">$</span> find /writeups -type f -name "*.md"</p>
+                <p>/writeups/bug-bounty/standoff-2025.md</p>
+                <p>/writeups/ctf/egcert-national-2024.md</p>
+                <p>/writeups/ctf/web-exploit-challenges.md</p>
+                <p>/writeups/methodology/OWASP-Top10.md</p>
+                <p><span class="prompt">$</span> <span id="cursor">█</span></p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-bug"></i> Bug Bounty Reports</h2>
+                <span class="skill-tag">20+ Vulnerabilities</span>
+            </div>
+            <p>Here are some of my bug bounty findings and responsible disclosures:</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">May 2025 - Present</div>
+                    <div class="timeline-title">Standoff Platform</div>
+                    <p>Reported multiple vulnerabilities including:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Cross-Site Scripting (XSS) in user profile section</li>
+                        <li>IDOR (Insecure Direct Object Reference) vulnerability</li>
+                        <li>Information disclosure in API endpoints</li>
+                        <li>CSRF (Cross-Site Request Forgery) in account settings</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Platforms:</strong> Standoff365, other private programs</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem;">
+                <h3 style="color: var(--secondary);">Methodology</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Reconnaissance</span>
+                    <span class="skill-tag">Vulnerability Scanning</span>
+                    <span class="skill-tag">Manual Testing</span>
+                    <span class="skill-tag">Proof of Concept</span>
+                    <span class="skill-tag">Report Writing</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-flag"></i> CTF Writeups</h2>
+                <span class="skill-tag">80+ Challenges Solved</span>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-title">EG-CERT National CTF 2024</div>
+                    <p><strong>Achievement:</strong> 13th Rank Nationally</p>
+                    <p>Specialized in Web and Network exploitation challenges. Solved complex challenges involving:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>SQL Injection bypass techniques</li>
+                        <li>JWT token manipulation</li>
+                        <li>SSRF (Server-Side Request Forgery)</li>
+                        <li>Binary exploitation and reverse engineering</li>
+                        <li>Network traffic analysis and pcap investigation</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-2025</div>
+                    <div class="timeline-title">Egyptian Military Academy CTF</div>
+                    <p>Participated in multiple CTF events organized by military academies with focus on:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Cryptography challenges</li>
+                        <li>Steganography techniques</li>
+                        <li>Forensics analysis</li>
+                        <li>Web application security</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2024-2025</div>
+                    <div class="timeline-title">Arab Security Events</div>
+                    <p>Regular participant in Arab security community CTF events:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Real-world scenario simulations</li>
+                        <li>Red team vs Blue team exercises</li>
+                        <li>Network penetration testing challenges</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1.5rem;">
+                <h3 style="color: var(--secondary);">CTF Categories</h3>
+                <div class="skills-container">
+                    <span class="skill-tag">Web Exploitation</span>
+                    <span class="skill-tag">Network Security</span>
+                    <span class="skill-tag">Cryptography</span>
+                    <span class="skill-tag">Forensics</span>
+                    <span class="skill-tag">Reverse Engineering</span>
+                    <span class="skill-tag">Steganography</span>
+                    <span class="skill-tag">Binary Exploitation</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-file-alt"></i> Latest Writeup</h2>
+            </div>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                    </div>
+                    <div class="terminal-title">writeup-template.md</div>
+                </div>
+                <div class="terminal-content">
+                    <p># Writeup: [Challenge Name]</p>
+                    <p>## Challenge Category: Web</p>
+                    <p>## Difficulty: Medium</p>
+                    <br>
+                    <p>## Summary</p>
+                    <p>Brief description of the challenge and the vulnerability.</p>
+                    <br>
+                    <p>## Tools Used</p>
+                    <p>- Burp Suite</p>
+                    <p>- Python requests</p>
+                    <p>- Browser Developer Tools</p>
+                    <br>
+                    <p>## Methodology</p>
+                    <p>1. Reconnaissance</p>
+                    <p>2. Vulnerability Identification</p>
+                    <p>3. Exploitation</p>
+                    <p>4. Flag Capture</p>
+                    <br>
+                    <p>## Solution</p>
+                    <p>Detailed step-by-step solution...</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="#" class="btn"><i class="fab fa-github"></i> View All Writeups on GitHub</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/nooh75" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/nooh-zidan" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:nooh.ali.zidan@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>© 2025 Nooh Zidan. All rights reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Ethical Hacker | Security Researcher | CTF Player</p>
+    </footer>
+    
+    <script>
+        // Matrix background effect
+        const matrixBg = document.getElementById('matrixBg');
+        const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+        
+        function createMatrix() {
+            const columns = Math.floor(window.innerWidth / 20);
+            matrixBg.innerHTML = '';
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.style.position = 'absolute';
+                column.style.top = '-100px';
+                column.style.left = i * 20 + 'px';
+                column.style.width = '20px';
+                column.style.color = 'var(--hacker-green)';
+                column.style.fontSize = '18px';
+                column.style.fontFamily = 'monospace';
+                column.style.textAlign = 'center';
+                column.style.textShadow = '0 0 5px var(--hacker-green)';
+                column.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                matrixBg.appendChild(column);
+                animateColumn(column);
+            }
+        }
+        
+        function animateColumn(column) {
+            let length = Math.floor(Math.random() * 10) + 5;
+            let delay = Math.random() * 5;
+            
+            setTimeout(() => {
+                let position = 0;
+                
+                const interval = setInterval(() => {
+                    let text = '';
+                    for (let i = 0; i < length; i++) {
+                        if (i === position) {
+                            text += chars[Math.floor(Math.random() * chars.length)];
+                        } else if (i < position) {
+                            text += chars[Math.floor(Math.random() * chars.length)];
+                        } else {
+                            text += ' ';
+                        }
+                    }
+                    
+                    column.innerHTML = text.replace(/ /g, '&nbsp;');
+                    
+                    if (position < length) {
+                        position++;
+                    } else {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            animateColumn(column);
+                        }, Math.random() * 2000);
+                    }
+                }, 100);
+            }, delay * 1000);
+        }
+        
+        // Cursor blink effect
+        const cursor = document.getElementById('cursor');
+        if (cursor) {
+            let cursorVisible = true;
+            
+            setInterval(() => {
+                cursorVisible = !cursorVisible;
+                cursor.style.opacity = cursorVisible ? 1 : 0;
+            }, 500);
+        }
+        
+        // Initialize
+        window.addEventListener('load', createMatrix);
+        window.addEventListener('resize', createMatrix);
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+    </script>
+</body>
+</html>
