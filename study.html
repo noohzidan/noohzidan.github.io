@@ -1,699 +1,1081 @@
+<!-- study-corner.html -->
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study & Prayer Hub | Nooh Zidan</title>
+    <title>Study Corner | Nooh Zidan</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #8A2BE2;
-            --secondary: #1E1E2E;
-            --accent: #00BFFF;
-            --text: #E6E6FA;
-            --dark: #121212;
-            --prayer-green: #506A1B;
-            --prayer-light-green: #6E9226;
-            --prayer-dark-green: #3A4E13;
-        }
-
-        body {
-            background-color: var(--dark);
-            color: var(--text);
-            overflow-x: hidden;
+        /* Study Corner Specific Styles */
+        .study-corner {
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 30px 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #071a1a 50%, #0a0a2a 100%);
             position: relative;
-            animation: fadeInDown 1.5s ease;
+            overflow: hidden;
         }
 
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 30px;
+        .shape {
+            position: absolute;
+            background: rgba(0, 255, 100, 0.05);
+            border: 1px solid rgba(0, 255, 100, 0.1);
+            border-radius: 50%;
         }
 
-        /* Main Layout */
-        .dashboard {
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation: float 25s infinite linear reverse;
+        }
+
+        .shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            animation: float 30s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .study-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr 350px;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .panel {
-            background: rgba(30, 30, 46, 0.7);
+        @media (max-width: 1024px) {
+            .study-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .main-study-area {
+            background: rgba(10, 20, 15, 0.7);
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            animation: fadeInUp 1s ease;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 100, 0.2);
+            backdrop-filter: blur(10px);
+            height: fit-content;
         }
 
-        .panel:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.2);
-        }
-
-        .panel-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--accent);
+        .sidebar {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .panel-title i {
-            color: var(--primary);
-        }
-
-        /* Prayer Times Section */
-        .prayer-container {
-            background: rgba(80, 106, 27, 0.2);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(110, 146, 38, 0.3);
-        }
-
-        .prayer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .prayer-title {
-            font-size: 1.5rem;
-            color: var(--prayer-light-green);
-        }
-
-        .location {
-            font-size: 1rem;
-            opacity: 0.8;
+        .sidebar-card {
+            background: rgba(15, 25, 20, 0.8);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 255, 100, 0.15);
+            backdrop-filter: blur(5px);
         }
 
         .prayer-times {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            background: linear-gradient(135deg, #0a1a2a 0%, #0a2a2a 100%);
         }
 
-        .prayer-time {
-            background: rgba(110, 146, 38, 0.2);
-            padding: 15px;
-            border-radius: 10px;
+        .timer-section {
+            background: linear-gradient(135deg, #1a0a2a 0%, #2a0a2a 100%);
+        }
+
+        .tasks-section {
+            background: linear-gradient(135deg, #0a2a1a 0%, #1a2a0a 100%);
+        }
+
+        .pomodoro-timer {
             text-align: center;
-            transition: all 0.3s ease;
+            padding: 1rem;
         }
 
-        .prayer-time:hover {
-            background: rgba(110, 146, 38, 0.4);
-            transform: scale(1.05);
-        }
-
-        .prayer-name {
-            font-size: 1.1rem;
-            color: var(--prayer-light-green);
-            margin-bottom: 5px;
-        }
-
-        .prayer-hour {
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        /* Timer Section */
         .timer-display {
             font-size: 4rem;
-            text-align: center;
-            margin: 20px 0;
-            font-weight: 300;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+            font-weight: bold;
+            color: var(--hacker-green);
+            text-shadow: 0 0 20px rgba(0, 255, 100, 0.5);
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
         }
 
         .timer-controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            color: white;
-            font-weight: 600;
+        .timer-btn {
+            background: rgba(0, 255, 100, 0.1);
+            border: 1px solid var(--hacker-green);
+            color: var(--hacker-green);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.5);
+        .timer-btn:hover {
+            background: var(--hacker-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--hacker-green);
         }
 
-        .btn:active {
-            transform: translateY(1px);
+        .timer-btn.reset {
+            background: rgba(255, 50, 50, 0.1);
+            border-color: #ff3333;
+            color: #ff3333;
         }
 
-        /* Task List */
+        .timer-btn.reset:hover {
+            background: #ff3333;
+            color: #000;
+        }
+
+        .timer-modes {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .mode-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-btn.active {
+            background: var(--hacker-green);
+            color: #000;
+            font-weight: bold;
+        }
+
         .task-input {
             display: flex;
-            margin-bottom: 20px;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .task-input input {
             flex: 1;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 50px 0 0 50px;
-            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 100, 0.3);
+            border-radius: 8px;
             color: var(--text);
-            font-size: 1rem;
+            font-family: 'Courier New', monospace;
         }
 
         .task-input button {
-            padding: 12px 20px;
+            background: var(--hacker-green);
+            color: #000;
             border: none;
-            border-radius: 0 50px 50px 0;
-            background: var(--primary);
-            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
             transition: all 0.3s ease;
         }
 
         .task-input button:hover {
-            background: var(--accent);
+            box-shadow: 0 0 10px var(--hacker-green);
         }
 
         .task-list {
-            list-style: none;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .task-item {
             display: flex;
             align-items: center;
-            padding: 15px;
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            animation: slideIn 0.5s ease;
-        }
-
-        .task-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid var(--hacker-green);
         }
 
         .task-item.completed {
             opacity: 0.6;
+            border-left-color: var(--text-dim);
+        }
+
+        .task-item.completed .task-text {
             text-decoration: line-through;
+            color: var(--text-dim);
         }
 
         .task-checkbox {
-            margin-right: 15px;
+            margin-right: 0.8rem;
             width: 20px;
             height: 20px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .task-checkbox.checked {
-            background: var(--primary);
+        .task-text {
+            flex: 1;
+            font-size: 0.9rem;
         }
 
-        .task-checkbox.checked::after {
-            content: "✓";
-            color: white;
-            font-size: 12px;
+        .task-delete {
+            background: none;
+            border: none;
+            color: #ff3333;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
-        /* Resources */
-        .resources-grid {
+        .task-delete:hover {
+            background: rgba(255, 50, 50, 0.1);
+        }
+
+        .study-tools {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .resource-card {
-            background: rgba(255, 255, 255, 0.05);
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
-            padding: 15px;
+            padding: 1.5rem;
             text-align: center;
+            border: 1px solid rgba(0, 255, 100, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .resource-card:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .tool-card:hover {
             transform: translateY(-5px);
+            border-color: var(--hacker-green);
+            box-shadow: 0 5px 15px rgba(0, 255, 100, 0.2);
         }
 
-        .resource-icon {
+        .tool-icon {
             font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--accent);
+            color: var(--hacker-green);
+            margin-bottom: 1rem;
         }
 
-        /* Quotes */
-        .quote-container {
+        .ambient-sounds {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .sound-btn {
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 100, 0.2);
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .sound-btn.active {
+            background: var(--hacker-green);
+            color: #000;
+            font-weight: bold;
+        }
+
+        .sound-btn:hover {
+            border-color: var(--hacker-green);
+        }
+
+        .sound-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .volume-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--hacker-green);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .study-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item {
             text-align: center;
-            padding: 30px;
-            background: rgba(138, 43, 226, 0.1);
-            border-radius: 15px;
-            margin-top: 30px;
-            animation: fadeIn 2s ease;
         }
 
-        .quote-text {
-            font-size: 1.5rem;
-            font-style: italic;
-            margin-bottom: 15px;
-            line-height: 1.5;
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--hacker-green);
         }
 
-        .quote-author {
-            font-size: 1rem;
-            opacity: 0.7;
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-dim);
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 1px solid rgba(138, 43, 226, 0.3);
-            opacity: 0.7;
-        }
-
-        /* Rain Animation */
-        .rain-container {
+        .focus-mode {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .raindrop {
-            position: absolute;
-            top: -20px;
-            width: 2px;
-            height: 20px;
-            background: linear-gradient(to bottom, transparent, var(--accent));
-            animation: rain linear infinite;
-            opacity: 0.6;
+        .focus-timer {
+            font-size: 6rem;
+            color: var(--hacker-green);
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 30px var(--hacker-green);
+            margin-bottom: 2rem;
         }
 
-        @keyframes rain {
-            to {
-                transform: translateY(100vh);
-            }
+        .focus-task {
+            font-size: 1.5rem;
+            color: var(--text);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            text-align: center;
+            padding: 0 2rem;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .exit-focus {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid var(--hacker-green);
+            color: var(--hacker-green);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
 
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .exit-focus:hover {
+            background: var(--hacker-green);
+            color: #000;
         }
 
-        @keyframes fadeInDown {
-            from { 
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .quote-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border-left: 4px solid var(--hacker-green);
+            font-style: italic;
+            text-align: center;
         }
 
-        @keyframes slideIn {
-            from { 
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .quote {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .prayer-times {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .quote-author {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .study-tips {
+            background: rgba(0, 50, 100, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .study-tips h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .study-tips ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .study-tips li {
+            margin-bottom: 0.3rem;
         }
     </style>
 </head>
-<body>
-    <!-- Rain Animation -->
-    <div class="rain-container" id="rainContainer"></div>
+<body class="study-corner">
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
-    <div class="container">
-        <header>
-            <h1 class="logo">Study & Prayer Hub</h1>
-            <p class="tagline">مرحباً في مركز الدراسة والعبادة - Your perfect companion for productive study sessions</p>
-        </header>
+    <header>
+        <nav>
+            <div class="logo">Study<span>Corner</span></div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="studying.html"><i class="fas fa-graduation-cap"></i> Studying</a></li>
+                <li><a href="portfolio.html"><i class="fas fa-code"></i> Portfolio</a></li>
+                <li><a href="notion.html"><i class="fas fa-book"></i> Notion</a></li>
+                <li><a href="writeups.html"><i class="fas fa-file-alt"></i> Writeups</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
 
-        <div class="dashboard">
-            <!-- Prayer Times Panel -->
-            <div class="panel">
-                <h2 class="panel-title"><i class="fas fa-mosque"></i> مواقيت الصلاة</h2>
-                <div class="prayer-container">
-                    <div class="prayer-header">
-                        <h3 class="prayer-title">اليوم</h3>
-                        <div class="location">دمليج، مصر</div>
+    <main class="container">
+        <div class="terminal" style="margin-bottom: 2rem;">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+                <div class="terminal-title">nooh@study-corner:~$</div>
+            </div>
+            <div class="terminal-content">
+                <p><span class="prompt">$</span> system_status --study_mode</p>
+                <p>> Focus Mode: READY</p>
+                <p>> Pomodoro Timer: LOADED (25:00)</p>
+                <p>> Ambient Sounds: AVAILABLE</p>
+                <p>> Task Manager: ACTIVE</p>
+                <p><span class="prompt">$</span> <span id="cursor">█</span></p>
+            </div>
+        </div>
+
+        <div class="study-grid">
+            <!-- Main Study Area -->
+            <div class="main-study-area">
+                <h2 style="color: var(--hacker-green); margin-bottom: 1.5rem;">
+                    <i class="fas fa-brain"></i> Study Zone
+                </h2>
+                
+                <div class="study-tools">
+                    <div class="tool-card" id="focusModeBtn">
+                        <div class="tool-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <h3>Focus Mode</h3>
+                        <p>Full-screen concentration</p>
                     </div>
-                    <div class="prayer-times">
-                        <div class="prayer-time">
-                            <div class="prayer-name">الفجر</div>
-                            <div class="prayer-hour">4:45 ص</div>
+                    
+                    <div class="tool-card" onclick="toggleAmbientSound('rain')">
+                        <div class="tool-icon">
+                            <i class="fas fa-cloud-rain"></i>
                         </div>
-                        <div class="prayer-time">
-                            <div class="prayer-name">الشروق</div>
-                            <div class="prayer-hour">6:12 ص</div>
+                        <h3>Rain Sounds</h3>
+                        <p>Calm rain atmosphere</p>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleAmbientSound('cafe')">
+                        <div class="tool-icon">
+                            <i class="fas fa-coffee"></i>
                         </div>
-                        <div class="prayer-time">
-                            <div class="prayer-name">الظهر</div>
-                            <div class="prayer-hour">12:05 م</div>
+                        <h3>Cafe Ambiance</h3>
+                        <p>Background café sounds</p>
+                    </div>
+                    
+                    <div class="tool-card" onclick="toggleAmbientSound('white')">
+                        <div class="tool-icon">
+                            <i class="fas fa-wave-square"></i>
                         </div>
-                        <div class="prayer-time">
-                            <div class="prayer-name">العصر</div>
-                            <div class="prayer-hour">3:25 م</div>
-                        </div>
-                        <div class="prayer-time">
-                            <div class="prayer-name">المغرب</div>
-                            <div class="prayer-hour">6:05 م</div>
-                        </div>
-                        <div class="prayer-time">
-                            <div class="prayer-name">العشاء</div>
-                            <div class="prayer-hour">7:32 م</div>
-                        </div>
+                        <h3>White Noise</h3>
+                        <p>Focus-enhancing noise</p>
                     </div>
                 </div>
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-compass"></i></div>
-                        <h3>إتجاه القبلة</h3>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">
+                        <i class="fas fa-volume-up"></i> Ambient Sounds
+                    </h3>
+                    <div class="ambient-sounds">
+                        <button class="sound-btn" onclick="toggleAmbientSound('rain')">
+                            <i class="fas fa-cloud-rain"></i> Rain
+                        </button>
+                        <button class="sound-btn" onclick="toggleAmbientSound('cafe')">
+                            <i class="fas fa-coffee"></i> Café
+                        </button>
+                        <button class="sound-btn" onclick="toggleAmbientSound('white')">
+                            <i class="fas fa-wave-square"></i> White Noise
+                        </button>
+                        <button class="sound-btn" onclick="toggleAmbientSound('forest')">
+                            <i class="fas fa-tree"></i> Forest
+                        </button>
+                        <button class="sound-btn" onclick="toggleAmbientSound('waves')">
+                            <i class="fas fa-water"></i> Ocean Waves
+                        </button>
+                        <button class="sound-btn" onclick="toggleAmbientSound('fireplace')">
+                            <i class="fas fa-fire"></i> Fireplace
+                        </button>
                     </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-moon"></i></div>
-                        <h3>القمر اليوم</h3>
+                    
+                    <div class="sound-controls">
+                        <i class="fas fa-volume-down" style="color: var(--text-dim);"></i>
+                        <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
+                        <i class="fas fa-volume-up" style="color: var(--text-dim);"></i>
+                        <button class="timer-btn" onclick="stopAllSounds()" style="padding: 0.5rem 1rem;">
+                            <i class="fas fa-stop"></i> Stop All
+                        </button>
                     </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-calendar"></i></div>
-                        <h3>التاريخ الهجري</h3>
-                    </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-pray"></i></div>
-                        <h3>الأذكار</h3>
-                    </div>
+                </div>
+
+                <div class="quote-container">
+                    <p class="quote">"The expert in anything was once a beginner."</p>
+                    <p class="quote-author">– Helen Hayes</p>
+                </div>
+
+                <div class="study-tips">
+                    <h4><i class="fas fa-lightbulb"></i> Study Tips</h4>
+                    <ul>
+                        <li>Use the Pomodoro technique (25 min study, 5 min break)</li>
+                        <li>Set clear goals for each study session</li>
+                        <li>Take regular breaks to maintain focus</li>
+                        <li>Use ambient sounds to block distractions</li>
+                        <li>Review your tasks before starting</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Timer Panel -->
-            <div class="panel">
-                <h2 class="panel-title"><i class="fas fa-clock"></i> Focus Timer</h2>
-                <div class="timer-display" id="timer">25:00</div>
-                <div class="timer-controls">
-                    <button class="btn" id="startTimer"><i class="fas fa-play"></i> Start</button>
-                    <button class="btn" id="pauseTimer"><i class="fas fa-pause"></i> Pause</button>
-                    <button class="btn" id="resetTimer"><i class="fas fa-redo"></i> Reset</button>
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Prayer Times -->
+                <div class="sidebar-card prayer-times">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">
+                        <i class="fas fa-mosque"></i> Prayer Times
+                    </h3>
+                    <iframe 
+                        src="https://timesprayer.com/widgets.php?frame=1&lang=en&name=demlig&sound=true&avachang=true&fcolor=07056A&tcolor=404592&frcolor=00034E" 
+                        style="border: none; overflow: hidden; width: 100%; height: 191px;">
+                    </iframe>
                 </div>
-            </div>
 
-            <!-- Task Panel -->
-            <div class="panel">
-                <h2 class="panel-title"><i class="fas fa-tasks"></i> Study Tasks</h2>
-                <div class="task-input">
-                    <input type="text" id="taskInput" placeholder="Add a new task...">
-                    <button id="addTask"><i class="fas fa-plus"></i></button>
+                <!-- Pomodoro Timer -->
+                <div class="sidebar-card timer-section">
+                    <h3 style="color: var(--hacker-green); margin-bottom: 1rem;">
+                        <i class="fas fa-clock"></i> Pomodoro Timer
+                    </h3>
+                    <div class="pomodoro-timer">
+                        <div class="timer-display" id="timerDisplay">25:00</div>
+                        
+                        <div class="timer-modes">
+                            <button class="mode-btn active" onclick="setTimerMode('pomodoro')">Pomodoro</button>
+                            <button class="mode-btn" onclick="setTimerMode('shortBreak')">Short Break</button>
+                            <button class="mode-btn" onclick="setTimerMode('longBreak')">Long Break</button>
+                        </div>
+                        
+                        <div class="timer-controls">
+                            <button class="timer-btn" id="startBtn" onclick="startTimer()">
+                                <i class="fas fa-play"></i> Start
+                            </button>
+                            <button class="timer-btn" id="pauseBtn" onclick="pauseTimer()" style="display: none;">
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button class="timer-btn reset" onclick="resetTimer()">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <ul class="task-list" id="taskList">
-                    <!-- Tasks will be added here dynamically -->
-                </ul>
-            </div>
 
-            <!-- Resources Panel -->
-            <div class="panel">
-                <h2 class="panel-title"><i class="fas fa-book"></i> Quick Resources</h2>
-                <div class="resources-grid">
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-calculator"></i></div>
-                        <h3>Math Formulas</h3>
+                <!-- Task Manager -->
+                <div class="sidebar-card tasks-section">
+                    <h3 style="color: #00ff9d; margin-bottom: 1rem;">
+                        <i class="fas fa-tasks"></i> Study Tasks
+                    </h3>
+                    
+                    <div class="task-input">
+                        <input type="text" id="taskInput" placeholder="Add a new task..." onkeypress="addTaskOnEnter(event)">
+                        <button onclick="addTask()">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
                     </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-language"></i></div>
-                        <h3>Vocabulary</h3>
+                    
+                    <div class="task-list" id="taskList">
+                        <!-- Tasks will be added here -->
                     </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-flask"></i></div>
-                        <h3>Science Notes</h3>
-                    </div>
-                    <div class="resource-card">
-                        <div class="resource-icon"><i class="fas fa-history"></i></div>
-                        <h3>History Dates</h3>
+                    
+                    <div class="study-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalTasks">0</div>
+                            <div class="stat-label">Total Tasks</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="completedTasks">0</div>
+                            <div class="stat-label">Completed</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="quote-container">
-            <p class="quote-text" id="quote">"The expert in anything was once a beginner."</p>
-            <p class="quote-author" id="author">- Helen Hayes</p>
-        </div>
-
-        <footer>
-            <p>Study & Prayer Hub • Created by Nooh Zidan • noohzidan.github.io</p>
-        </footer>
+    <!-- Focus Mode Overlay -->
+    <div class="focus-mode" id="focusMode">
+        <div class="focus-timer" id="focusTimer">25:00</div>
+        <div class="focus-task" id="focusTask">Current Task: None</div>
+        <button class="exit-focus" onclick="exitFocusMode()">
+            <i class="fas fa-times"></i> Exit Focus Mode
+        </button>
     </div>
 
     <script>
-        // Timer functionality
+        // Timer Variables
         let timerInterval;
+        let timeLeft = 25 * 60; // 25 minutes in seconds
         let timerRunning = false;
-        let timerTime = 25 * 60; // 25 minutes in seconds
-        
-        const timerDisplay = document.getElementById('timer');
-        const startBtn = document.getElementById('startTimer');
-        const pauseBtn = document.getElementById('pauseTimer');
-        const resetBtn = document.getElementById('resetTimer');
-        
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timerTime / 60);
-            const seconds = timerTime % 60;
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        let currentMode = 'pomodoro';
+
+        // Timer Modes (in seconds)
+        const timerModes = {
+            pomodoro: 25 * 60,
+            shortBreak: 5 * 60,
+            longBreak: 15 * 60
+        };
+
+        // Task Management
+        let tasks = JSON.parse(localStorage.getItem('studyTasks')) || [];
+        let currentTask = '';
+
+        // Audio Management
+        let audioElements = {};
+        let currentSound = null;
+
+        // DOM Elements
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+        const totalTasksEl = document.getElementById('totalTasks');
+        const completedTasksEl = document.getElementById('completedTasks');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const focusModeEl = document.getElementById('focusMode');
+        const focusTimerEl = document.getElementById('focusTimer');
+        const focusTaskEl = document.getElementById('focusTask');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTasks();
+            updateTaskStats();
+            initializeAudio();
+            
+            // Set initial timer display
+            updateTimerDisplay();
+            
+            // Load timer mode from localStorage
+            const savedMode = localStorage.getItem('timerMode');
+            if (savedMode && timerModes[savedMode]) {
+                setTimerMode(savedMode, false);
+            }
+            
+            // Update cursor blink
+            const cursor = document.getElementById('cursor');
+            if (cursor) {
+                let cursorVisible = true;
+                setInterval(() => {
+                    cursorVisible = !cursorVisible;
+                    cursor.style.opacity = cursorVisible ? 1 : 0;
+                }, 500);
+            }
+        });
+
+        // Timer Functions
+        function setTimerMode(mode, updateDisplay = true) {
+            currentMode = mode;
+            timeLeft = timerModes[mode];
+            
+            // Update active button
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(mode)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            if (updateDisplay) {
+                resetTimer();
+                localStorage.setItem('timerMode', mode);
+            }
         }
-        
+
         function startTimer() {
             if (!timerRunning) {
                 timerRunning = true;
+                startBtn.style.display = 'none';
+                pauseBtn.style.display = 'block';
+                
                 timerInterval = setInterval(() => {
-                    if (timerTime > 0) {
-                        timerTime--;
-                        updateTimerDisplay();
-                    } else {
-                        clearInterval(timerInterval);
-                        timerRunning = false;
-                        // Timer completed - could add a notification here
+                    timeLeft--;
+                    updateTimerDisplay();
+                    
+                    if (timeLeft <= 0) {
+                        timerComplete();
                     }
                 }, 1000);
             }
         }
-        
+
         function pauseTimer() {
-            clearInterval(timerInterval);
             timerRunning = false;
+            clearInterval(timerInterval);
+            startBtn.style.display = 'block';
+            pauseBtn.style.display = 'none';
         }
-        
+
         function resetTimer() {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            timerTime = 25 * 60;
+            pauseTimer();
+            timeLeft = timerModes[currentMode];
             updateTimerDisplay();
         }
-        
-        startBtn.addEventListener('click', startTimer);
-        pauseBtn.addEventListener('click', pauseTimer);
-        resetBtn.addEventListener('click', resetTimer);
-        
-        // Task list functionality
-        const taskInput = document.getElementById('taskInput');
-        const addTaskBtn = document.getElementById('addTask');
-        const taskList = document.getElementById('taskList');
-        
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update focus timer if active
+            if (focusModeEl.style.display === 'flex') {
+                focusTimerEl.textContent = timerDisplay.textContent;
+            }
+        }
+
+        function timerComplete() {
+            pauseTimer();
+            
+            // Play notification sound
+            playNotification();
+            
+            // Show notification
+            if (Notification.permission === 'granted') {
+                new Notification('Timer Complete!', {
+                    body: `Your ${currentMode} timer has finished.`,
+                    icon: 'https://img.icons8.com/color/96/000000/timer.png'
+                });
+            }
+            
+            // Auto-switch to next mode
+            if (currentMode === 'pomodoro') {
+                // Count completed pomodoros
+                const completed = parseInt(localStorage.getItem('pomodorosCompleted') || '0');
+                localStorage.setItem('pomodorosCompleted', (completed + 1).toString());
+                
+                // Every 4 pomodoros, take a long break
+                if ((completed + 1) % 4 === 0) {
+                    setTimerMode('longBreak');
+                } else {
+                    setTimerMode('shortBreak');
+                }
+            } else {
+                setTimerMode('pomodoro');
+            }
+            
+            startTimer(); // Auto-start next timer
+        }
+
+        // Task Functions
         function addTask() {
             const taskText = taskInput.value.trim();
             if (taskText) {
-                const taskItem = document.createElement('li');
-                taskItem.className = 'task-item';
+                const task = {
+                    id: Date.now(),
+                    text: taskText,
+                    completed: false,
+                    createdAt: new Date().toISOString()
+                };
                 
-                const checkbox = document.createElement('div');
-                checkbox.className = 'task-checkbox';
-                
-                const taskContent = document.createElement('span');
-                taskContent.textContent = taskText;
-                
-                taskItem.appendChild(checkbox);
-                taskItem.appendChild(taskContent);
-                taskList.appendChild(taskItem);
-                
+                tasks.unshift(task);
+                saveTasks();
+                renderTasks();
                 taskInput.value = '';
-                
-                // Add click event to toggle completion
-                checkbox.addEventListener('click', function() {
-                    this.classList.toggle('checked');
-                    taskItem.classList.toggle('completed');
-                });
+                updateTaskStats();
             }
         }
-        
-        addTaskBtn.addEventListener('click', addTask);
-        taskInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
+
+        function addTaskOnEnter(event) {
+            if (event.key === 'Enter') {
+                addTask();
+            }
+        }
+
+        function toggleTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                saveTasks();
+                renderTasks();
+                updateTaskStats();
+            }
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            saveTasks();
+            renderTasks();
+            updateTaskStats();
+        }
+
+        function renderTasks() {
+            taskList.innerHTML = '';
+            
+            if (tasks.length === 0) {
+                taskList.innerHTML = '<p style="text-align: center; color: var(--text-dim); padding: 1rem;">No tasks yet. Add one above!</p>';
+                return;
+            }
+            
+            tasks.forEach(task => {
+                const taskEl = document.createElement('div');
+                taskEl.className = `task-item ${task.completed ? 'completed' : ''}`;
+                taskEl.innerHTML = `
+                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} 
+                           onclick="toggleTask(${task.id})">
+                    <div class="task-text">${task.text}</div>
+                    <button class="task-delete" onclick="deleteTask(${task.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                taskList.appendChild(taskEl);
+            });
+        }
+
+        function updateTaskStats() {
+            totalTasksEl.textContent = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            completedTasksEl.textContent = completed;
+        }
+
+        function saveTasks() {
+            localStorage.setItem('studyTasks', JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            tasks = JSON.parse(localStorage.getItem('studyTasks')) || [];
+            renderTasks();
+        }
+
+        // Audio Functions
+        function initializeAudio() {
+            // Audio files for ambient sounds
+            const audioSources = {
+                rain: 'https://assets.mixkit.co/sfx/preview/mixkit-rain-loop-1249.mp3',
+                cafe: 'https://assets.mixkit.co/sfx/preview/mixkit-busy-cafe-ambience-444.mp3',
+                white: 'https://assets.mixkit.co/sfx/preview/mixkit-sci-fi-ambience-loop-361.mp3',
+                forest: 'https://assets.mixkit.co/sfx/preview/mixkit-forest-ambience-573.mp3',
+                waves: 'https://assets.mixkit.co/sfx/preview/mixkit-waves-on-the-beach-1230.mp3',
+                fireplace: 'https://assets.mixkit.co/sfx/preview/mixkit-crackling-fireplace-1230.mp3'
+            };
+            
+            // Create audio elements
+            Object.keys(audioSources).forEach(key => {
+                const audio = new Audio(audioSources[key]);
+                audio.loop = true;
+                audio.volume = volumeSlider.value / 100;
+                audioElements[key] = audio;
+            });
+            
+            // Notification sound
+            audioElements.notification = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3');
+        }
+
+        function toggleAmbientSound(sound) {
+            // Update button states
+            document.querySelectorAll('.sound-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            document.querySelectorAll('.sound-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(sound)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Stop current sound if playing
+            if (currentSound && currentSound !== sound) {
+                audioElements[currentSound].pause();
+            }
+            
+            // Play or pause the selected sound
+            const audio = audioElements[sound];
+            if (currentSound === sound) {
+                audio.pause();
+                currentSound = null;
+                document.querySelectorAll('.sound-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+            } else {
+                audio.currentTime = 0;
+                audio.volume = volumeSlider.value / 100;
+                audio.play();
+                currentSound = sound;
+            }
+        }
+
+        function stopAllSounds() {
+            if (currentSound) {
+                audioElements[currentSound].pause();
+                currentSound = null;
+            }
+            
+            document.querySelectorAll('.sound-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
+
+        function playNotification() {
+            audioElements.notification.volume = volumeSlider.value / 100;
+            audioElements.notification.currentTime = 0;
+            audioElements.notification.play();
+        }
+
+        // Volume Control
+        volumeSlider.addEventListener('input', function() {
+            const volume = this.value / 100;
+            
+            // Update all audio elements
+            Object.values(audioElements).forEach(audio => {
+                audio.volume = volume;
+            });
+        });
+
+        // Focus Mode
+        document.getElementById('focusModeBtn').addEventListener('click', function() {
+            // Get current task for focus mode
+            const activeTask = tasks.find(t => !t.completed);
+            currentTask = activeTask ? activeTask.text : 'No active task';
+            
+            // Update focus mode display
+            focusTaskEl.textContent = `Current Task: ${currentTask}`;
+            focusTimerEl.textContent = timerDisplay.textContent;
+            
+            // Show focus mode
+            focusModeEl.style.display = 'flex';
+            
+            // Request notification permission
+            if (Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+            
+            // Start timer if not running
+            if (!timerRunning) {
+                startTimer();
+            }
+        });
+
+        function exitFocusMode() {
+            focusModeEl.style.display = 'none';
+            pauseTimer();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Space to pause/play timer
+            if (event.code === 'Space' && !event.target.matches('input, textarea')) {
+                event.preventDefault();
+                if (timerRunning) {
+                    pauseTimer();
+                } else {
+                    startTimer();
+                }
+            }
+            
+            // Escape to exit focus mode
+            if (event.code === 'Escape' && focusModeEl.style.display === 'flex') {
+                exitFocusMode();
+            }
+            
+            // Ctrl+Enter to add task
+            if (event.ctrlKey && event.code === 'Enter' && document.activeElement === taskInput) {
                 addTask();
             }
         });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
         
-        // Motivational quotes
-        const quotes = [
-            { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
-            { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
-            { text: "The expert in anything was once a beginner.", author: "Helen Hayes" },
-            { text: "Quality is not an act, it is a habit.", author: "Aristotle" },
-            { text: "The harder you work for something, the greater you'll feel when you achieve it.", author: "Unknown" },
-            { text: "Success is the sum of small efforts, repeated day in and day out.", author: "Robert Collier" }
-        ];
-        
-        const quoteElement = document.getElementById('quote');
-        const authorElement = document.getElementById('author');
-        
-        function changeQuote() {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            quoteElement.textContent = `"${quotes[randomIndex].text}"`;
-            authorElement.textContent = `- ${quotes[randomIndex].author}`;
-            
-            // Add fade effect
-            quoteElement.style.opacity = 0;
-            authorElement.style.opacity = 0;
-            
-            setTimeout(() => {
-                quoteElement.style.opacity = 1;
-                authorElement.style.opacity = 1;
-            }, 500);
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
         }
+
+        // Save timer state before leaving
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('timerTimeLeft', timeLeft);
+            localStorage.setItem('timerRunning', timerRunning);
+            localStorage.setItem('currentMode', currentMode);
+        });
+
+        // Load timer state
+        const savedTimeLeft = localStorage.getItem('timerTimeLeft');
+        const savedTimerRunning = localStorage.getItem('timerRunning');
+        const savedCurrentMode = localStorage.getItem('currentMode');
         
-        // Change quote every 30 seconds
-        setInterval(changeQuote, 30000);
-        
-        // Initialize with a random quote
-        changeQuote();
-        updateTimerDisplay();
-        
-        // Rain animation
-        function createRain() {
-            const rainContainer = document.getElementById('rainContainer');
-            const raindropCount = 100;
-            
-            for (let i = 0; i < raindropCount; i++) {
-                const raindrop = document.createElement('div');
-                raindrop.className = 'raindrop';
-                
-                // Random position and animation duration
-                const left = Math.random() * 100;
-                const animationDuration = 1 + Math.random() * 2;
-                const animationDelay = Math.random() * 5;
-                
-                raindrop.style.left = `${left}%`;
-                raindrop.style.animationDuration = `${animationDuration}s`;
-                raindrop.style.animationDelay = `${animationDelay}s`;
-                
-                rainContainer.appendChild(raindrop);
-            }
-        }
-        
-        // Initialize rain animation
-        createRain();
-        
-        // Add some sample tasks
-        const sampleTasks = [
-            "Complete math assignment",
-            "Read chapter 5 of textbook",
-            "Review lecture notes",
-            "Prepare for upcoming test"
-        ];
-        
-        // Uncomment the following lines if you want sample tasks to appear on load
-        // sampleTasks.forEach(task => {
-        //     taskInput.value = task;
-        //     addTask();
-        // });
-    </script>
-</body>
-</html>
+        if (savedTimeLeft && savedCurrentMode) {
+            timeLeft = parseInt(savedTimeLeft);
+            currentMode = savedCurrentMode;
+            timerRunning
