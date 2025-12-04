@@ -15,39 +15,50 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #F8F9FA;
+            color: #2D3436;
             min-height: 100vh;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Calm Colors */
+        /* Muted, Professional Color Palette */
         :root {
-            --primary: #5D6AFB;
-            --primary-light: #7B8AFF;
-            --primary-dark: #4A56CC;
-            --secondary: #6C757D;
-            --success: #28A745;
-            --warning: #FFC107;
-            --danger: #DC3545;
-            --light: #F8F9FA;
-            --dark: #343A40;
-            --gray: #6C757D;
-            --gray-light: #E9ECEF;
-            --border: #DEE2E6;
-            --shadow: rgba(0, 0, 0, 0.08);
-            --shadow-hover: rgba(0, 0, 0, 0.12);
+            --bg-primary: #F8F9FA;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F1F3F4;
+            --text-primary: #2D3436;
+            --text-secondary: #636E72;
+            --text-tertiary: #B2BEC3;
+            --border-color: #DFE6E9;
+            --shadow-light: rgba(99, 110, 114, 0.08);
+            --shadow-medium: rgba(99, 110, 114, 0.12);
+            
+            /* Muted Accent Colors */
+            --accent-blue: #6C8AA8;
+            --accent-green: #74B49B;
+            --accent-beige: #D8C3A5;
+            --accent-brown: #A99E8C;
+            --accent-sage: #8BA888;
+            
+            /* Status Colors */
+            --success: #74B49B;
+            --warning: #F0A96E;
+            --error: #E17055;
         }
 
         /* Navigation */
         .navbar {
-            background: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            background: var(--bg-secondary);
+            padding: 1.25rem 2.5rem;
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.92);
         }
 
         .nav-container {
@@ -62,72 +73,79 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--dark);
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-primary);
             text-decoration: none;
+            letter-spacing: -0.02em;
         }
 
         .logo-icon {
-            color: var(--primary);
+            color: var(--accent-blue);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.75rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--gray);
+            color: var(--text-secondary);
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            font-weight: 450;
+            font-size: 0.95rem;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
-            background: rgba(93, 106, 251, 0.05);
+            color: var(--accent-blue);
+            background: rgba(108, 138, 168, 0.06);
         }
 
         .nav-links a.active {
-            color: var(--primary);
-            background: rgba(93, 106, 251, 0.1);
+            color: var(--accent-blue);
+            background: rgba(108, 138, 168, 0.1);
+            font-weight: 500;
         }
 
         /* Main Layout */
         .container {
             max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            margin: 3rem auto;
+            padding: 0 2.5rem;
         }
 
         .page-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .page-header h1 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            font-size: 2.75rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+            letter-spacing: -0.03em;
         }
 
         .page-header p {
-            color: var(--gray);
-            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 350;
         }
 
         /* Study Grid Layout */
         .study-grid {
             display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 2rem;
+            grid-template-columns: 1fr 380px;
+            gap: 2.5rem;
+            align-items: start;
         }
 
         @media (max-width: 1200px) {
@@ -138,113 +156,105 @@
 
         /* Cards */
         .card {
-            background: white;
-            border-radius: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 20px var(--shadow);
-            border: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 12px var(--shadow-light);
+            border: 1px solid var(--border-color);
+            transition: all 0.25s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--shadow-hover);
+            box-shadow: 0 4px 24px var(--shadow-medium);
         }
 
         .card-header {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
             padding-bottom: 1rem;
-            border-bottom: 2px solid var(--gray-light);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .card-header i {
-            color: var(--primary);
-            font-size: 1.5rem;
+            color: var(--accent-blue);
+            font-size: 1.25rem;
         }
 
         .card-header h2 {
-            font-size: 1.5rem;
-            color: var(--dark);
-            font-weight: 600;
-        }
-
-        /* Prayer Widget Card */
-        .prayer-card {
-            background: linear-gradient(135deg, #07056A 0%, #404592 100%);
-            color: white;
-        }
-
-        .prayer-card .card-header {
-            border-bottom-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .prayer-card .card-header i,
-        .prayer-card .card-header h2 {
-            color: white;
+            font-size: 1.375rem;
+            color: var(--text-primary);
+            font-weight: 450;
+            letter-spacing: -0.02em;
         }
 
         /* Timer Section */
         .timer-display {
-            font-size: 4.5rem;
+            font-size: 4.25rem;
             font-weight: 300;
             text-align: center;
-            color: var(--dark);
-            margin: 1.5rem 0;
+            color: var(--text-primary);
+            margin: 2rem 0;
             font-feature-settings: "tnum";
             font-variant-numeric: tabular-nums;
+            letter-spacing: -0.03em;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
         }
 
         .timer-controls {
             display: flex;
             gap: 1rem;
             justify-content: center;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         .timer-btn {
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 450;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.625rem;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
         }
 
         .timer-btn.primary {
-            background: var(--primary);
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
             color: white;
         }
 
         .timer-btn.primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+            background: #5A7696;
+            border-color: #5A7696;
+            transform: translateY(-1px);
         }
 
         .timer-btn.secondary {
-            background: var(--gray-light);
-            color: var(--dark);
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
         }
 
         .timer-btn.secondary:hover {
-            background: var(--border);
-            transform: translateY(-2px);
+            background: #E8EAED;
+            transform: translateY(-1px);
         }
 
-        .timer-btn.danger {
-            background: var(--danger);
-            color: white;
+        .timer-btn.reset {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
         }
 
-        .timer-btn.danger:hover {
-            background: #c82333;
-            transform: translateY(-2px);
+        .timer-btn.reset:hover {
+            background: var(--bg-tertiary);
+            transform: translateY(-1px);
         }
 
         .timer-modes {
@@ -255,65 +265,74 @@
         }
 
         .mode-btn {
-            padding: 0.5rem 1.5rem;
-            border: 2px solid var(--border);
-            background: white;
-            border-radius: 8px;
-            color: var(--gray);
+            padding: 0.625rem 1.5rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            transition: all 0.2s ease;
+            font-weight: 450;
+            font-size: 0.9rem;
         }
 
         .mode-btn:hover {
-            border-color: var(--primary-light);
-            color: var(--primary);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
         }
 
         .mode-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
             color: white;
         }
 
         /* Tasks Section */
         .task-input {
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.75rem;
+            margin-bottom: 1.75rem;
         }
 
         .task-input input {
             flex: 1;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            padding: 0.875rem 1.125rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
         .task-input input:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(108, 138, 168, 0.1);
+        }
+
+        .task-input input::placeholder {
+            color: var(--text-tertiary);
         }
 
         .task-input button {
-            padding: 0.75rem 1.5rem;
-            background: var(--primary);
+            padding: 0.875rem 1.5rem;
+            background: var(--accent-blue);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s ease;
+            font-weight: 450;
+            transition: background 0.2s ease;
+            font-size: 0.95rem;
         }
 
         .task-input button:hover {
-            background: var(--primary-dark);
+            background: #5A7696;
         }
 
         .task-list {
-            max-height: 300px;
+            max-height: 320px;
             overflow-y: auto;
             padding-right: 0.5rem;
         }
@@ -322,56 +341,59 @@
             display: flex;
             align-items: center;
             padding: 1rem;
-            background: var(--gray-light);
-            border-radius: 10px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
             margin-bottom: 0.75rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            border-left: 3px solid var(--accent-blue);
         }
 
         .task-item:hover {
-            background: #e2e6ea;
-            transform: translateX(4px);
+            background: #E8EAED;
+            transform: translateX(2px);
         }
 
         .task-checkbox {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             margin-right: 1rem;
             cursor: pointer;
-            accent-color: var(--primary);
+            accent-color: var(--accent-blue);
         }
 
         .task-text {
             flex: 1;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-primary);
         }
 
         .task-item.completed .task-text {
             text-decoration: line-through;
-            color: var(--gray);
+            color: var(--text-tertiary);
         }
 
         .task-delete {
             background: none;
             border: none;
-            color: var(--gray);
+            color: var(--text-tertiary);
             cursor: pointer;
             padding: 0.5rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
         }
 
         .task-delete:hover {
-            background: rgba(220, 53, 69, 0.1);
-            color: var(--danger);
+            background: rgba(225, 112, 85, 0.1);
+            color: var(--error);
         }
 
         .task-stats {
             display: flex;
             justify-content: space-between;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid var(--gray-light);
+            margin-top: 1.75rem;
+            padding-top: 1.75rem;
+            border-top: 1px solid var(--border-color);
         }
 
         .stat-item {
@@ -379,84 +401,88 @@
         }
 
         .stat-value {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: var(--primary);
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: var(--accent-blue);
+            letter-spacing: -0.02em;
         }
 
         .stat-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            margin-top: 0.375rem;
+            font-weight: 400;
         }
 
         /* Study Tools */
         .study-tools {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .tool-card {
-            background: white;
-            border-radius: 12px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
             padding: 1.5rem;
             text-align: center;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            transition: all 0.25s ease;
             cursor: pointer;
         }
 
         .tool-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px var(--shadow-hover);
-            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow-medium);
+            border-color: var(--accent-blue);
         }
 
         .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(93, 106, 251, 0.1);
-            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            background: rgba(108, 138, 168, 0.08);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.125rem;
         }
 
         .tool-icon i {
-            font-size: 1.5rem;
-            color: var(--primary);
+            font-size: 1.375rem;
+            color: var(--accent-blue);
         }
 
         .tool-card h3 {
-            color: var(--dark);
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
-            font-weight: 600;
+            font-weight: 450;
+            font-size: 1.0625rem;
         }
 
         .tool-card p {
-            color: var(--gray);
-            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
         }
 
         /* Ambient Sounds */
         .sound-controls {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 0.875rem;
+            margin-top: 1.75rem;
         }
 
         .sound-btn {
-            padding: 1rem;
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            color: var(--gray);
+            padding: 0.875rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -464,68 +490,115 @@
         }
 
         .sound-btn:hover {
-            border-color: var(--primary-light);
-            color: var(--primary);
-            transform: translateY(-2px);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
         }
 
         .sound-btn.active {
-            background: var(--primary);
-            border-color: var(--primary);
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
             color: white;
         }
 
         .sound-btn i {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .sound-btn span {
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        /* Volume Control */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .volume-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         /* Quote Section */
         .quote-container {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(93, 106, 251, 0.05) 0%, rgba(123, 138, 255, 0.05) 100%);
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
+            margin-top: 2.5rem;
+            padding: 1.75rem;
+            background: linear-gradient(135deg, rgba(108, 138, 168, 0.04) 0%, rgba(116, 180, 155, 0.04) 100%);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-blue);
         }
 
         .quote {
-            font-style: italic;
-            color: var(--dark);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-style: normal;
+            color: var(--text-primary);
+            font-size: 1.0625rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+            font-weight: 400;
         }
 
         .quote-author {
-            color: var(--gray);
+            color: var(--text-secondary);
             text-align: right;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            font-style: italic;
         }
 
         /* Study Tips */
         .study-tips {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(40, 167, 69, 0.05);
-            border-radius: 12px;
-            border-left: 4px solid var(--success);
+            margin-top: 2.5rem;
+            padding: 1.75rem;
+            background: rgba(116, 180, 155, 0.04);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-green);
         }
 
         .study-tips h4 {
-            color: var(--success);
+            color: var(--accent-green);
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.625rem;
+            font-weight: 450;
+            font-size: 1.0625rem;
         }
 
         .study-tips ul {
-            list-style-position: inside;
-            color: var(--dark);
+            list-style: none;
+            color: var(--text-primary);
         }
 
         .study-tips li {
-            margin-bottom: 0.5rem;
-            padding-left: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+
+        .study-tips li:before {
+            content: "•";
+            color: var(--accent-green);
+            position: absolute;
+            left: 0;
         }
 
         /* Focus Mode */
@@ -535,56 +608,96 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #F8F9FA 0%, #F1F3F4 100%);
             z-index: 1000;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: white;
+            color: var(--text-primary);
         }
 
         .focus-timer {
-            font-size: 8rem;
+            font-size: 6.5rem;
             font-weight: 300;
             font-feature-settings: "tnum";
             font-variant-numeric: tabular-nums;
-            margin-bottom: 2rem;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2.5rem;
+            color: var(--accent-blue);
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+            letter-spacing: -0.03em;
         }
 
         .focus-task {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 3rem;
             text-align: center;
             max-width: 600px;
             padding: 0 2rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
+            font-weight: 400;
+            line-height: 1.6;
         }
 
         .exit-focus {
-            padding: 1rem 3rem;
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
+            padding: 1rem 2.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 450;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
         }
 
         .exit-focus:hover {
-            background: rgba(255, 255, 255, 0.25);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        /* Prayer Widget Styling */
+        .prayer-widget-container {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Stats Card */
+        .stats-card {
+            background: linear-gradient(135deg, rgba(108, 138, 168, 0.05) 0%, rgba(116, 180, 155, 0.05) 100%);
+        }
+
+        .stats-value {
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-align: center;
+            color: var(--accent-blue);
+            margin: 1.5rem 0;
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stats-label {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            font-weight: 400;
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 0 1rem;
+                padding: 0 1.5rem;
+                margin: 2rem auto;
+            }
+            
+            .navbar {
+                padding: 1rem 1.5rem;
             }
             
             .nav-links {
@@ -595,9 +708,17 @@
                 display: block;
                 background: none;
                 border: none;
-                font-size: 1.5rem;
-                color: var(--gray);
+                font-size: 1.25rem;
+                color: var(--text-secondary);
                 cursor: pointer;
+            }
+            
+            .page-header h1 {
+                font-size: 2.25rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
             }
             
             .timer-display {
@@ -613,37 +734,82 @@
             }
             
             .focus-timer {
-                font-size: 5rem;
+                font-size: 4.5rem;
+            }
+            
+            .focus-task {
+                font-size: 1.25rem;
             }
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--gray-light);
-            border-radius: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--primary-light);
-            border-radius: 4px;
+            background: var(--accent-blue);
+            border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
+            background: #5A7696;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: rgba(108, 138, 168, 0.2);
         }
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(12px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
         }
 
         .card, .tool-card {
-            animation: fadeIn 0.6s ease-out;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        /* Utility Classes */
+        .text-muted {
+            color: var(--text-tertiary);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+
+        .bg-subtle {
+            background: var(--bg-tertiary);
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Success Animation */
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .success-pulse {
+            animation: successPulse 0.5s ease;
         }
     </style>
 </head>
@@ -652,7 +818,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="dashboard.html" class="logo">
-                <i class="fas fa-brain logo-icon"></i>
+                <i class="fas fa-book-open logo-icon"></i>
                 <span>Study Corner</span>
             </a>
             <ul class="nav-links">
@@ -671,8 +837,8 @@
     <!-- Main Content -->
     <main class="container">
         <div class="page-header">
-            <h1>Study Corner</h1>
-            <p>A calm, focused space for productive studying with integrated prayer times and task management</p>
+            <h1>Quiet Study Space</h1>
+            <p>A serene environment designed for focused learning and productive study sessions</p>
         </div>
 
         <div class="study-grid">
@@ -682,7 +848,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-clock"></i>
-                        <h2>Pomodoro Timer</h2>
+                        <h2>Focus Timer</h2>
                     </div>
                     
                     <div class="timer-display" id="timerDisplay">25:00</div>
@@ -706,7 +872,7 @@
                         <button class="timer-btn secondary" id="pauseBtn" onclick="pauseTimer()" style="display: none;">
                             <i class="fas fa-pause"></i> Pause
                         </button>
-                        <button class="timer-btn danger" onclick="resetTimer()">
+                        <button class="timer-btn reset" onclick="resetTimer()">
                             <i class="fas fa-redo"></i> Reset
                         </button>
                     </div>
@@ -716,7 +882,7 @@
                 <div class="card" style="margin-top: 2rem;">
                     <div class="card-header">
                         <i class="fas fa-tools"></i>
-                        <h2>Study Tools</h2>
+                        <h2>Study Environment</h2>
                     </div>
                     
                     <div class="study-tools">
@@ -725,7 +891,7 @@
                                 <i class="fas fa-crosshairs"></i>
                             </div>
                             <h3>Focus Mode</h3>
-                            <p>Full-screen concentration mode</p>
+                            <p>Full-screen distraction-free mode</p>
                         </div>
                         
                         <div class="tool-card" onclick="toggleAmbientSound('rain')">
@@ -733,7 +899,7 @@
                                 <i class="fas fa-cloud-rain"></i>
                             </div>
                             <h3>Rain Sounds</h3>
-                            <p>Calm rain atmosphere</p>
+                            <p>Gentle rainfall atmosphere</p>
                         </div>
                         
                         <div class="tool-card" onclick="toggleAmbientSound('cafe')">
@@ -741,7 +907,7 @@
                                 <i class="fas fa-coffee"></i>
                             </div>
                             <h3>Cafe Ambiance</h3>
-                            <p>Background café sounds</p>
+                            <p>Subtle background café sounds</p>
                         </div>
                         
                         <div class="tool-card" onclick="toggleAmbientSound('white')">
@@ -749,13 +915,13 @@
                                 <i class="fas fa-wave-square"></i>
                             </div>
                             <h3>White Noise</h3>
-                            <p>Focus-enhancing noise</p>
+                            <p>Soothing focus-enhancing noise</p>
                         </div>
                     </div>
 
                     <!-- Ambient Sounds -->
                     <div style="margin-top: 2rem;">
-                        <h3 style="color: var(--dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <h3 style="color: var(--text-primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; font-weight: 450;">
                             <i class="fas fa-volume-up"></i> Ambient Sounds
                         </h3>
                         <div class="sound-controls">
@@ -777,7 +943,7 @@
                             </button>
                             <button class="sound-btn" onclick="toggleAmbientSound('waves')">
                                 <i class="fas fa-water"></i>
-                                <span>Ocean Waves</span>
+                                <span>Ocean</span>
                             </button>
                             <button class="sound-btn" onclick="toggleAmbientSound('fireplace')">
                                 <i class="fas fa-fire"></i>
@@ -785,13 +951,12 @@
                             </button>
                         </div>
                         
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem;">
-                            <i class="fas fa-volume-down" style="color: var(--gray);"></i>
-                            <input type="range" min="0" max="100" value="30" class="timer-btn" id="volumeSlider" 
-                                   style="flex: 1; padding: 0;">
-                            <i class="fas fa-volume-up" style="color: var(--gray);"></i>
-                            <button class="timer-btn secondary" onclick="stopAllSounds()" style="padding: 0.5rem 1rem;">
-                                <i class="fas fa-stop"></i> Stop All
+                        <div class="volume-control">
+                            <i class="fas fa-volume-down text-muted"></i>
+                            <input type="range" min="0" max="100" value="30" class="volume-slider" id="volumeSlider">
+                            <i class="fas fa-volume-up text-muted"></i>
+                            <button class="timer-btn secondary" onclick="stopAllSounds()" style="padding: 0.625rem 1rem; font-size: 0.875rem;">
+                                <i class="fas fa-stop"></i> Stop
                             </button>
                         </div>
                     </div>
@@ -799,19 +964,19 @@
 
                 <!-- Quote -->
                 <div class="quote-container">
-                    <p class="quote">"The beautiful thing about learning is that no one can take it away from you."</p>
-                    <p class="quote-author">– B.B. King</p>
+                    <p class="quote">"The capacity to learn is a gift; the ability to learn is a skill; the willingness to learn is a choice."</p>
+                    <p class="quote-author">– Brian Herbert</p>
                 </div>
 
                 <!-- Study Tips -->
                 <div class="study-tips">
-                    <h4><i class="fas fa-lightbulb"></i> Study Tips</h4>
+                    <h4><i class="fas fa-lightbulb"></i> Effective Study Tips</h4>
                     <ul>
-                        <li>Use the Pomodoro technique (25 min study, 5 min break)</li>
-                        <li>Set clear, achievable goals for each session</li>
-                        <li>Take regular breaks to maintain focus and prevent burnout</li>
-                        <li>Use ambient sounds to create an optimal study environment</li>
-                        <li>Stay hydrated and maintain good posture</li>
+                        <li>Use the Pomodoro technique: 25 minutes focused work, 5 minutes break</li>
+                        <li>Set specific, achievable goals for each study session</li>
+                        <li>Take regular breaks to maintain concentration and prevent fatigue</li>
+                        <li>Create a dedicated study space free from distractions</li>
+                        <li>Review material within 24 hours to improve retention</li>
                     </ul>
                 </div>
             </div>
@@ -819,15 +984,17 @@
             <!-- Right Column: Sidebar -->
             <div class="sidebar">
                 <!-- Prayer Times -->
-                <div class="card prayer-card">
-                    <div class="card-header">
+                <div class="card" style="padding: 0;">
+                    <div class="card-header" style="margin: 0; padding: 1.5rem; border-bottom: 1px solid var(--border-color);">
                         <i class="fas fa-mosque"></i>
                         <h2>Prayer Times</h2>
                     </div>
-                    <iframe 
-                        src="https://timesprayer.com/widgets.php?frame=1&lang=en&name=demlig&sound=true&avachang=true&fcolor=07056A&tcolor=404592&frcolor=00034E" 
-                        style="border: none; overflow: hidden; width: 100%; height: 191px; border-radius: 8px;">
-                    </iframe>
+                    <div class="prayer-widget-container">
+                        <iframe 
+                            src="https://timesprayer.com/widgets.php?frame=1&lang=en&name=demlig&sound=true&avachang=true&fcolor=07056A&tcolor=404592&frcolor=00034E" 
+                            style="border: none; width: 100%; height: 191px;">
+                        </iframe>
+                    </div>
                 </div>
 
                 <!-- Task Manager -->
@@ -860,19 +1027,19 @@
                     </div>
                 </div>
 
-                <!-- Quick Stats -->
-                <div class="card" style="margin-top: 2rem;">
+                <!-- Study Statistics -->
+                <div class="card stats-card" style="margin-top: 2rem;">
                     <div class="card-header">
                         <i class="fas fa-chart-line"></i>
                         <h2>Today's Progress</h2>
                     </div>
-                    <div style="text-align: center; padding: 1.5rem 0;">
-                        <div style="font-size: 3rem; font-weight: 300; color: var(--primary);" id="pomodorosCompleted">0</div>
-                        <div style="color: var(--gray); margin-top: 0.5rem;">Pomodoros Completed</div>
+                    <div style="padding: 1rem 0;">
+                        <div class="stats-value" id="pomodorosCompleted">0</div>
+                        <div class="stats-label">Pomodoros Completed</div>
                     </div>
-                    <div style="text-align: center; padding: 1.5rem 0; border-top: 2px solid var(--gray-light);">
-                        <div style="font-size: 3rem; font-weight: 300; color: var(--success);" id="studyTime">00:00</div>
-                        <div style="color: var(--gray); margin-top: 0.5rem;">Study Time</div>
+                    <div style="padding: 1.5rem 0; border-top: 1px solid rgba(108, 138, 168, 0.2);">
+                        <div class="stats-value" id="studyTime">00:00</div>
+                        <div class="stats-label">Total Study Time</div>
                     </div>
                 </div>
             </div>
@@ -942,16 +1109,6 @@
             // Load total study time
             totalStudyTime = parseInt(localStorage.getItem('totalStudyTime') || '0');
             
-            // Update cursor blink
-            const cursor = document.getElementById('cursor');
-            if (cursor) {
-                let cursorVisible = true;
-                setInterval(() => {
-                    cursorVisible = !cursorVisible;
-                    cursor.style.opacity = cursorVisible ? 1 : 0;
-                }, 500);
-            }
-
             // Start study time tracking
             startStudyTimeTracking();
         });
@@ -1036,7 +1193,7 @@
             if (Notification.permission === 'granted') {
                 new Notification('Timer Complete!', {
                     body: `Your ${currentMode} timer has finished.`,
-                    icon: 'https://img.icons8.com/color/96/000000/timer.png'
+                    icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236C8AA8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>'
                 });
             }
             
@@ -1045,6 +1202,8 @@
                 const completed = parseInt(localStorage.getItem('pomodorosCompleted') || '0');
                 localStorage.setItem('pomodorosCompleted', (completed + 1).toString());
                 pomodorosCompletedEl.textContent = completed + 1;
+                pomodorosCompletedEl.classList.add('success-pulse');
+                setTimeout(() => pomodorosCompletedEl.classList.remove('success-pulse'), 500);
             }
             
             // Auto-switch to next mode
@@ -1103,6 +1262,7 @@
                 renderTasks();
                 taskInput.value = '';
                 updateTaskStats();
+                taskInput.focus();
             }
         }
 
@@ -1133,7 +1293,7 @@
             taskList.innerHTML = '';
             
             if (tasks.length === 0) {
-                taskList.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 1rem;">No tasks yet. Add one above!</p>';
+                taskList.innerHTML = '<p style="text-align: center; color: var(--text-tertiary); padding: 1.5rem; font-size: 0.95rem;">No tasks yet. Add one above!</p>';
                 return;
             }
             
@@ -1344,11 +1504,19 @@
                 navLinks.style.top = '100%';
                 navLinks.style.left = '0';
                 navLinks.style.right = '0';
-                navLinks.style.background = 'white';
+                navLinks.style.background = 'var(--bg-secondary)';
                 navLinks.style.padding = '1rem';
-                navLinks.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                navLinks.style.boxShadow = '0 4px 20px var(--shadow-medium)';
+                navLinks.style.borderBottom = '1px solid var(--border-color)';
             });
         }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.nav-container') && window.innerWidth <= 768) {
+                navLinks.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
