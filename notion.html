@@ -1,0 +1,252 @@
+<!-- notion.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion | Nooh Zidan</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">Nooh<span>Zidan</span></div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="writeups.html">Writeups</a></li>
+                <li><a href="notion.html" class="active">Notion</a></li>
+                <li><a href="studying.html">Studying</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="terminal" style="margin-bottom: 2rem;">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                </div>
+                <div class="terminal-title">nooh@notion:~$</div>
+            </div>
+            <div class="terminal-content">
+                <p><span class="prompt">$</span> ls -la /knowledge-base/</p>
+                <p>drwxr-xr-x   METHODOLOGY</p>
+                <p>drwxr-xr-x   WEB-PENTEST</p>
+                <p>drwxr-xr-x   EWAPT</p>
+                <p>drwxr-xr-x   NETWORK</p>
+                <p><span class="prompt">$</span> <span id="cursor">█</span></p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-book"></i> Notion Knowledge Base</h2>
+            </div>
+            <p>My organized security research, methodologies, and study notes hosted on Notion:</p>
+            
+            <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div class="card" style="background: linear-gradient(135deg, var(--card-bg) 0%, #1a2b1a 100%);">
+                    <h3 style="color: var(--hacker-green); margin-bottom: 1rem;"><i class="fas fa-project-diagram"></i> METHODOLOGY</h3>
+                    <p>Comprehensive penetration testing methodology covering all phases from reconnaissance to reporting.</p>
+                    <a href="https://quickest-quart-487.notion.site/METHODOLOGY-176dced75f7f80d3a513c884da6347e6" target="_blank" class="btn" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i> Open Notion
+                    </a>
+                </div>
+                
+                <div class="card" style="background: linear-gradient(135deg, var(--card-bg) 0%, #1a1a2b 100%);">
+                    <h3 style="color: var(--secondary); margin-bottom: 1rem;"><i class="fas fa-globe"></i> WEB PENTEST</h3>
+                    <p>Web application penetration testing techniques, OWASP Top 10, and exploitation methods.</p>
+                    <a href="https://quickest-quart-487.notion.site/web-pentest-1dadced75f7f80539ba6fc1f5b915154" target="_blank" class="btn" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i> Open Notion
+                    </a>
+                </div>
+                
+                <div class="card" style="background: linear-gradient(135deg, var(--card-bg) 0%, #2b1a2b 100%);">
+                    <h3 style="color: #ff66cc; margin-bottom: 1rem;"><i class="fas fa-shield-alt"></i> EWAPT</h3>
+                    <p>eLearnSecurity Web Application Penetration Tester notes and study materials.</p>
+                    <a href="https://quickest-quart-487.notion.site/ewapt-227dced75f7f8026b586f5d41b7561d8" target="_blank" class="btn" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i> Open Notion
+                    </a>
+                </div>
+                
+                <div class="card" style="background: linear-gradient(135deg, var(--card-bg) 0%, #1a2b2b 100%);">
+                    <h3 style="color: #00ffff; margin-bottom: 1rem;"><i class="fas fa-network-wired"></i> NETWORK</h3>
+                    <p>Network security concepts, protocols, attack vectors, and defense mechanisms.</p>
+                    <a href="https://quickest-quart-487.notion.site/network-175dced75f7f804392bddff5e6c1743c" target="_blank" class="btn" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i> Open Notion
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-clipboard-list"></i> Methodology Overview</h2>
+            </div>
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="terminal-dot red"></div>
+                        <div class="terminal-dot yellow"></div>
+                        <div class="terminal-dot green"></div>
+                    </div>
+                    <div class="terminal-title">methodology.sh</div>
+                </div>
+                <div class="terminal-content">
+                    <p>#!/bin/bash</p>
+                    <p># Nooh Zidan's Penetration Testing Methodology</p>
+                    <br>
+                    <p>echo "=== PHASE 1: RECONNAISSANCE ==="</p>
+                    <p># Passive & Active Information Gathering</p>
+                    <p># Subdomain Enumeration</p>
+                    <p># Technology Stack Identification</p>
+                    <br>
+                    <p>echo "=== PHASE 2: VULNERABILITY ANALYSIS ==="</p>
+                    <p># Automated Scanning (Nessus, Acunetix)</p>
+                    <p># Manual Testing (Burp Suite, OWASP ZAP)</p>
+                    <p># Vulnerability Prioritization</p>
+                    <br>
+                    <p>echo "=== PHASE 3: EXPLOITATION ==="</p>
+                    <p># Proof of Concept Development</p>
+                    <p># Privilege Escalation Testing</p>
+                    <p># Lateral Movement Simulation</p>
+                    <br>
+                    <p>echo "=== PHASE 4: POST-EXPLOITATION ==="</p>
+                    <p># Data Extraction Analysis</p>
+                    <p># Persistence Mechanisms</p>
+                    <p># Cleanup Procedures</p>
+                    <br>
+                    <p>echo "=== PHASE 5: REPORTING ==="</p>
+                    <p># Executive Summary</p>
+                    <p># Technical Details</p>
+                    <p># Remediation Recommendations</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-tags"></i> Key Topics Covered</h2>
+            </div>
+            <div class="skills-container">
+                <span class="skill-tag">OWASP Top 10</span>
+                <span class="skill-tag">Web Application Security</span>
+                <span class="skill-tag">Network Penetration Testing</span>
+                <span class="skill-tag">Vulnerability Assessment</span>
+                <span class="skill-tag">Exploit Development</span>
+                <span class="skill-tag">Red Teaming</span>
+                <span class="skill-tag">Bug Bounty Methodology</span>
+                <span class="skill-tag">CTF Strategies</span>
+                <span class="skill-tag">Security Tools</span>
+                <span class="skill-tag">Reporting & Documentation</span>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/nooh75" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/nooh-zidan" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:nooh.ali.zidan@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>© 2025 Nooh Zidan. All rights reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">Ethical Hacker | Security Researcher | CTF Player</p>
+    </footer>
+    
+    <script>
+        // Matrix background effect
+        const matrixBg = document.getElementById('matrixBg');
+        const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+        
+        function createMatrix() {
+            const columns = Math.floor(window.innerWidth / 20);
+            matrixBg.innerHTML = '';
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.style.position = 'absolute';
+                column.style.top = '-100px';
+                column.style.left = i * 20 + 'px';
+                column.style.width = '20px';
+                column.style.color = 'var(--hacker-green)';
+                column.style.fontSize = '18px';
+                column.style.fontFamily = 'monospace';
+                column.style.textAlign = 'center';
+                column.style.textShadow = '0 0 5px var(--hacker-green)';
+                column.style.opacity = Math.random() * 0.5 + 0.1;
+                
+                matrixBg.appendChild(column);
+                animateColumn(column);
+            }
+        }
+        
+        function animateColumn(column) {
+            let length = Math.floor(Math.random() * 10) + 5;
+            let delay = Math.random() * 5;
+            
+            setTimeout(() => {
+                let position = 0;
+                
+                const interval = setInterval(() => {
+                    let text = '';
+                    for (let i = 0; i < length; i++) {
+                        if (i === position) {
+                            text += chars[Math.floor(Math.random() * chars.length)];
+                        } else if (i < position) {
+                            text += chars[Math.floor(Math.random() * chars.length)];
+                        } else {
+                            text += ' ';
+                        }
+                    }
+                    
+                    column.innerHTML = text.replace(/ /g, '&nbsp;');
+                    
+                    if (position < length) {
+                        position++;
+                    } else {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            animateColumn(column);
+                        }, Math.random() * 2000);
+                    }
+                }, 100);
+            }, delay * 1000);
+        }
+        
+        // Cursor blink effect
+        const cursor = document.getElementById('cursor');
+        if (cursor) {
+            let cursorVisible = true;
+            
+            setInterval(() => {
+                cursorVisible = !cursorVisible;
+                cursor.style.opacity = cursorVisible ? 1 : 0;
+            }, 500);
+        }
+        
+        // Initialize
+        window.addEventListener('load', createMatrix);
+        window.addEventListener('resize', createMatrix);
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+    </script>
+</body>
+</html>
