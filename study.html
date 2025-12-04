@@ -5,353 +5,373 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Corner | Nooh Zidan</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Study Corner Specific Styles */
-        .study-corner {
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #333;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a 0%, #071a1a 50%, #0a0a2a 100%);
-            position: relative;
-            overflow: hidden;
+            line-height: 1.6;
         }
 
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+        /* Calm Colors */
+        :root {
+            --primary: #5D6AFB;
+            --primary-light: #7B8AFF;
+            --primary-dark: #4A56CC;
+            --secondary: #6C757D;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --light: #F8F9FA;
+            --dark: #343A40;
+            --gray: #6C757D;
+            --gray-light: #E9ECEF;
+            --border: #DEE2E6;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.12);
         }
 
-        .shape {
-            position: absolute;
-            background: rgba(0, 255, 100, 0.05);
-            border: 1px solid rgba(0, 255, 100, 0.1);
-            border-radius: 50%;
+        /* Navigation */
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            left: 5%;
-            animation: float 20s infinite linear;
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            top: 60%;
-            right: 10%;
-            animation: float 25s infinite linear reverse;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--dark);
+            text-decoration: none;
         }
 
-        .shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            bottom: 20%;
-            left: 20%;
-            animation: float 30s infinite linear;
+        .logo-icon {
+            color: var(--primary);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
 
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(93, 106, 251, 0.05);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            background: rgba(93, 106, 251, 0.1);
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .page-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Study Grid Layout */
         .study-grid {
             display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 1.5rem;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .study-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .main-study-area {
-            background: rgba(10, 20, 15, 0.7);
-            border-radius: 15px;
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
             padding: 2rem;
-            border: 1px solid rgba(0, 255, 100, 0.2);
-            backdrop-filter: blur(10px);
-            height: fit-content;
+            box-shadow: 0 4px 20px var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .sidebar {
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--shadow-hover);
+        }
+
+        .card-header {
             display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--gray-light);
         }
 
-        .sidebar-card {
-            background: rgba(15, 25, 20, 0.8);
-            border-radius: 10px;
-            padding: 1.5rem;
-            border: 1px solid rgba(0, 255, 100, 0.15);
-            backdrop-filter: blur(5px);
+        .card-header i {
+            color: var(--primary);
+            font-size: 1.5rem;
         }
 
-        .prayer-times {
-            background: linear-gradient(135deg, #0a1a2a 0%, #0a2a2a 100%);
+        .card-header h2 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            font-weight: 600;
         }
 
-        .timer-section {
-            background: linear-gradient(135deg, #1a0a2a 0%, #2a0a2a 100%);
+        /* Prayer Widget Card */
+        .prayer-card {
+            background: linear-gradient(135deg, #07056A 0%, #404592 100%);
+            color: white;
         }
 
-        .tasks-section {
-            background: linear-gradient(135deg, #0a2a1a 0%, #1a2a0a 100%);
+        .prayer-card .card-header {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
         }
 
-        .pomodoro-timer {
-            text-align: center;
-            padding: 1rem;
+        .prayer-card .card-header i,
+        .prayer-card .card-header h2 {
+            color: white;
         }
 
+        /* Timer Section */
         .timer-display {
-            font-size: 4rem;
-            font-weight: bold;
-            color: var(--hacker-green);
-            text-shadow: 0 0 20px rgba(0, 255, 100, 0.5);
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
+            font-size: 4.5rem;
+            font-weight: 300;
+            text-align: center;
+            color: var(--dark);
+            margin: 1.5rem 0;
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
         }
 
         .timer-controls {
             display: flex;
-            justify-content: center;
             gap: 1rem;
-            margin-top: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
         }
 
         .timer-btn {
-            background: rgba(0, 255, 100, 0.1);
-            border: 1px solid var(--hacker-green);
-            color: var(--hacker-green);
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .timer-btn:hover {
-            background: var(--hacker-green);
-            color: #000;
-            box-shadow: 0 0 15px var(--hacker-green);
+        .timer-btn.primary {
+            background: var(--primary);
+            color: white;
         }
 
-        .timer-btn.reset {
-            background: rgba(255, 50, 50, 0.1);
-            border-color: #ff3333;
-            color: #ff3333;
+        .timer-btn.primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
-        .timer-btn.reset:hover {
-            background: #ff3333;
-            color: #000;
+        .timer-btn.secondary {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+
+        .timer-btn.secondary:hover {
+            background: var(--border);
+            transform: translateY(-2px);
+        }
+
+        .timer-btn.danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .timer-btn.danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
         }
 
         .timer-modes {
             display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
         }
 
         .mode-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text);
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            color: var(--gray);
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .mode-btn:hover {
+            border-color: var(--primary-light);
+            color: var(--primary);
         }
 
         .mode-btn.active {
-            background: var(--hacker-green);
-            color: #000;
-            font-weight: bold;
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
         }
 
+        /* Tasks Section */
         .task-input {
             display: flex;
             gap: 0.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .task-input input {
             flex: 1;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 100, 0.3);
-            border-radius: 8px;
-            color: var(--text);
-            font-family: 'Courier New', monospace;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .task-input input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
         .task-input button {
-            background: var(--hacker-green);
-            color: #000;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
             border: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            transition: background 0.3s ease;
         }
 
         .task-input button:hover {
-            box-shadow: 0 0 10px var(--hacker-green);
+            background: var(--primary-dark);
         }
 
         .task-list {
             max-height: 300px;
             overflow-y: auto;
+            padding-right: 0.5rem;
         }
 
         .task-item {
             display: flex;
             align-items: center;
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            border-left: 3px solid var(--hacker-green);
+            padding: 1rem;
+            background: var(--gray-light);
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
         }
 
-        .task-item.completed {
-            opacity: 0.6;
-            border-left-color: var(--text-dim);
-        }
-
-        .task-item.completed .task-text {
-            text-decoration: line-through;
-            color: var(--text-dim);
+        .task-item:hover {
+            background: #e2e6ea;
+            transform: translateX(4px);
         }
 
         .task-checkbox {
-            margin-right: 0.8rem;
             width: 20px;
             height: 20px;
+            margin-right: 1rem;
             cursor: pointer;
+            accent-color: var(--primary);
         }
 
         .task-text {
             flex: 1;
-            font-size: 0.9rem;
+            font-size: 1rem;
+        }
+
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: var(--gray);
         }
 
         .task-delete {
             background: none;
             border: none;
-            color: #ff3333;
+            color: var(--gray);
             cursor: pointer;
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.5rem;
+            border-radius: 6px;
             transition: all 0.3s ease;
         }
 
         .task-delete:hover {
-            background: rgba(255, 50, 50, 0.1);
+            background: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
         }
 
-        .study-tools {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .tool-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(0, 255, 100, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--hacker-green);
-            box-shadow: 0 5px 15px rgba(0, 255, 100, 0.2);
-        }
-
-        .tool-icon {
-            font-size: 2rem;
-            color: var(--hacker-green);
-            margin-bottom: 1rem;
-        }
-
-        .ambient-sounds {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 0.8rem;
+        .task-stats {
+            display: flex;
+            justify-content: space-between;
             margin-top: 1.5rem;
-        }
-
-        .sound-btn {
-            padding: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 100, 0.2);
-            border-radius: 8px;
-            color: var(--text);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .sound-btn.active {
-            background: var(--hacker-green);
-            color: #000;
-            font-weight: bold;
-        }
-
-        .sound-btn:hover {
-            border-color: var(--hacker-green);
-        }
-
-        .sound-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .volume-slider {
-            flex: 1;
-            -webkit-appearance: none;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-            outline: none;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            background: var(--hacker-green);
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .study-stats {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid var(--gray-light);
         }
 
         .stat-item {
@@ -360,118 +380,281 @@
 
         .stat-value {
             font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--hacker-green);
+            font-weight: 600;
+            color: var(--primary);
         }
 
         .stat-label {
             font-size: 0.9rem;
-            color: var(--text-dim);
+            color: var(--gray);
+            margin-top: 0.25rem;
         }
 
+        /* Study Tools */
+        .study-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(93, 106, 251, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .tool-icon i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .tool-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .tool-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Ambient Sounds */
+        .sound-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .sound-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sound-btn:hover {
+            border-color: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .sound-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .sound-btn i {
+            font-size: 1.5rem;
+        }
+
+        /* Quote Section */
+        .quote-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(93, 106, 251, 0.05) 0%, rgba(123, 138, 255, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-author {
+            color: var(--gray);
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        /* Study Tips */
+        .study-tips {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(40, 167, 69, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid var(--success);
+        }
+
+        .study-tips h4 {
+            color: var(--success);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .study-tips ul {
+            list-style-position: inside;
+            color: var(--dark);
+        }
+
+        .study-tips li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        /* Focus Mode */
         .focus-mode {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             z-index: 1000;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: white;
         }
 
         .focus-timer {
-            font-size: 6rem;
-            color: var(--hacker-green);
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 30px var(--hacker-green);
+            font-size: 8rem;
+            font-weight: 300;
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
             margin-bottom: 2rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .focus-task {
-            font-size: 1.5rem;
-            color: var(--text);
-            margin-bottom: 2rem;
-            max-width: 600px;
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
             text-align: center;
+            max-width: 600px;
             padding: 0 2rem;
+            opacity: 0.9;
         }
 
         .exit-focus {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: 2px solid var(--hacker-green);
-            color: var(--hacker-green);
-            border-radius: 8px;
+            padding: 1rem 3rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .exit-focus:hover {
-            background: var(--hacker-green);
-            color: #000;
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
         }
 
-        .quote-container {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            border-left: 4px solid var(--hacker-green);
-            font-style: italic;
-            text-align: center;
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--gray);
+                cursor: pointer;
+            }
+            
+            .timer-display {
+                font-size: 3.5rem;
+            }
+            
+            .study-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .sound-controls {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .focus-timer {
+                font-size: 5rem;
+            }
         }
 
-        .quote {
-            color: var(--text);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .quote-author {
-            color: var(--text-dim);
-            font-size: 0.9rem;
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 4px;
         }
 
-        .study-tips {
-            background: rgba(0, 50, 100, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--text);
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
         }
 
-        .study-tips h4 {
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
         }
 
-        .study-tips ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .study-tips li {
-            margin-bottom: 0.3rem;
+        .card, .tool-card {
+            animation: fadeIn 0.6s ease-out;
         }
     </style>
 </head>
-<body class="study-corner">
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-
-    <header>
-        <nav>
-            <div class="logo">Study<span>Corner</span></div>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="dashboard.html" class="logo">
+                <i class="fas fa-brain logo-icon"></i>
+                <span>Study Corner</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
                 <li><a href="studying.html"><i class="fas fa-graduation-cap"></i> Studying</a></li>
@@ -482,168 +665,177 @@
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
     <main class="container">
-        <div class="terminal" style="margin-bottom: 2rem;">
-            <div class="terminal-header">
-                <div class="terminal-dots">
-                    <div class="terminal-dot red"></div>
-                    <div class="terminal-dot yellow"></div>
-                    <div class="terminal-dot green"></div>
-                </div>
-                <div class="terminal-title">nooh@study-corner:~$</div>
-            </div>
-            <div class="terminal-content">
-                <p><span class="prompt">$</span> system_status --study_mode</p>
-                <p>> Focus Mode: READY</p>
-                <p>> Pomodoro Timer: LOADED (25:00)</p>
-                <p>> Ambient Sounds: AVAILABLE</p>
-                <p>> Task Manager: ACTIVE</p>
-                <p><span class="prompt">$</span> <span id="cursor">█</span></p>
-            </div>
+        <div class="page-header">
+            <h1>Study Corner</h1>
+            <p>A calm, focused space for productive studying with integrated prayer times and task management</p>
         </div>
 
         <div class="study-grid">
-            <!-- Main Study Area -->
-            <div class="main-study-area">
-                <h2 style="color: var(--hacker-green); margin-bottom: 1.5rem;">
-                    <i class="fas fa-brain"></i> Study Zone
-                </h2>
-                
-                <div class="study-tools">
-                    <div class="tool-card" id="focusModeBtn">
-                        <div class="tool-icon">
-                            <i class="fas fa-crosshairs"></i>
-                        </div>
-                        <h3>Focus Mode</h3>
-                        <p>Full-screen concentration</p>
+            <!-- Left Column: Main Study Area -->
+            <div class="main-content">
+                <!-- Timer Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-clock"></i>
+                        <h2>Pomodoro Timer</h2>
                     </div>
                     
-                    <div class="tool-card" onclick="toggleAmbientSound('rain')">
-                        <div class="tool-icon">
-                            <i class="fas fa-cloud-rain"></i>
-                        </div>
-                        <h3>Rain Sounds</h3>
-                        <p>Calm rain atmosphere</p>
-                    </div>
+                    <div class="timer-display" id="timerDisplay">25:00</div>
                     
-                    <div class="tool-card" onclick="toggleAmbientSound('cafe')">
-                        <div class="tool-icon">
-                            <i class="fas fa-coffee"></i>
-                        </div>
-                        <h3>Cafe Ambiance</h3>
-                        <p>Background café sounds</p>
-                    </div>
-                    
-                    <div class="tool-card" onclick="toggleAmbientSound('white')">
-                        <div class="tool-icon">
-                            <i class="fas fa-wave-square"></i>
-                        </div>
-                        <h3>White Noise</h3>
-                        <p>Focus-enhancing noise</p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem;">
-                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">
-                        <i class="fas fa-volume-up"></i> Ambient Sounds
-                    </h3>
-                    <div class="ambient-sounds">
-                        <button class="sound-btn" onclick="toggleAmbientSound('rain')">
-                            <i class="fas fa-cloud-rain"></i> Rain
+                    <div class="timer-modes">
+                        <button class="mode-btn active" onclick="setTimerMode('pomodoro')">
+                            Focus (25:00)
                         </button>
-                        <button class="sound-btn" onclick="toggleAmbientSound('cafe')">
-                            <i class="fas fa-coffee"></i> Café
+                        <button class="mode-btn" onclick="setTimerMode('shortBreak')">
+                            Short Break (5:00)
                         </button>
-                        <button class="sound-btn" onclick="toggleAmbientSound('white')">
-                            <i class="fas fa-wave-square"></i> White Noise
-                        </button>
-                        <button class="sound-btn" onclick="toggleAmbientSound('forest')">
-                            <i class="fas fa-tree"></i> Forest
-                        </button>
-                        <button class="sound-btn" onclick="toggleAmbientSound('waves')">
-                            <i class="fas fa-water"></i> Ocean Waves
-                        </button>
-                        <button class="sound-btn" onclick="toggleAmbientSound('fireplace')">
-                            <i class="fas fa-fire"></i> Fireplace
+                        <button class="mode-btn" onclick="setTimerMode('longBreak')">
+                            Long Break (15:00)
                         </button>
                     </div>
                     
-                    <div class="sound-controls">
-                        <i class="fas fa-volume-down" style="color: var(--text-dim);"></i>
-                        <input type="range" min="0" max="100" value="50" class="volume-slider" id="volumeSlider">
-                        <i class="fas fa-volume-up" style="color: var(--text-dim);"></i>
-                        <button class="timer-btn" onclick="stopAllSounds()" style="padding: 0.5rem 1rem;">
-                            <i class="fas fa-stop"></i> Stop All
+                    <div class="timer-controls">
+                        <button class="timer-btn primary" id="startBtn" onclick="startTimer()">
+                            <i class="fas fa-play"></i> Start
+                        </button>
+                        <button class="timer-btn secondary" id="pauseBtn" onclick="pauseTimer()" style="display: none;">
+                            <i class="fas fa-pause"></i> Pause
+                        </button>
+                        <button class="timer-btn danger" onclick="resetTimer()">
+                            <i class="fas fa-redo"></i> Reset
                         </button>
                     </div>
                 </div>
 
+                <!-- Study Tools -->
+                <div class="card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <i class="fas fa-tools"></i>
+                        <h2>Study Tools</h2>
+                    </div>
+                    
+                    <div class="study-tools">
+                        <div class="tool-card" id="focusModeBtn">
+                            <div class="tool-icon">
+                                <i class="fas fa-crosshairs"></i>
+                            </div>
+                            <h3>Focus Mode</h3>
+                            <p>Full-screen concentration mode</p>
+                        </div>
+                        
+                        <div class="tool-card" onclick="toggleAmbientSound('rain')">
+                            <div class="tool-icon">
+                                <i class="fas fa-cloud-rain"></i>
+                            </div>
+                            <h3>Rain Sounds</h3>
+                            <p>Calm rain atmosphere</p>
+                        </div>
+                        
+                        <div class="tool-card" onclick="toggleAmbientSound('cafe')">
+                            <div class="tool-icon">
+                                <i class="fas fa-coffee"></i>
+                            </div>
+                            <h3>Cafe Ambiance</h3>
+                            <p>Background café sounds</p>
+                        </div>
+                        
+                        <div class="tool-card" onclick="toggleAmbientSound('white')">
+                            <div class="tool-icon">
+                                <i class="fas fa-wave-square"></i>
+                            </div>
+                            <h3>White Noise</h3>
+                            <p>Focus-enhancing noise</p>
+                        </div>
+                    </div>
+
+                    <!-- Ambient Sounds -->
+                    <div style="margin-top: 2rem;">
+                        <h3 style="color: var(--dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-volume-up"></i> Ambient Sounds
+                        </h3>
+                        <div class="sound-controls">
+                            <button class="sound-btn" onclick="toggleAmbientSound('rain')">
+                                <i class="fas fa-cloud-rain"></i>
+                                <span>Rain</span>
+                            </button>
+                            <button class="sound-btn" onclick="toggleAmbientSound('cafe')">
+                                <i class="fas fa-coffee"></i>
+                                <span>Café</span>
+                            </button>
+                            <button class="sound-btn" onclick="toggleAmbientSound('white')">
+                                <i class="fas fa-wave-square"></i>
+                                <span>White Noise</span>
+                            </button>
+                            <button class="sound-btn" onclick="toggleAmbientSound('forest')">
+                                <i class="fas fa-tree"></i>
+                                <span>Forest</span>
+                            </button>
+                            <button class="sound-btn" onclick="toggleAmbientSound('waves')">
+                                <i class="fas fa-water"></i>
+                                <span>Ocean Waves</span>
+                            </button>
+                            <button class="sound-btn" onclick="toggleAmbientSound('fireplace')">
+                                <i class="fas fa-fire"></i>
+                                <span>Fireplace</span>
+                            </button>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem;">
+                            <i class="fas fa-volume-down" style="color: var(--gray);"></i>
+                            <input type="range" min="0" max="100" value="30" class="timer-btn" id="volumeSlider" 
+                                   style="flex: 1; padding: 0;">
+                            <i class="fas fa-volume-up" style="color: var(--gray);"></i>
+                            <button class="timer-btn secondary" onclick="stopAllSounds()" style="padding: 0.5rem 1rem;">
+                                <i class="fas fa-stop"></i> Stop All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote -->
                 <div class="quote-container">
-                    <p class="quote">"The expert in anything was once a beginner."</p>
-                    <p class="quote-author">– Helen Hayes</p>
+                    <p class="quote">"The beautiful thing about learning is that no one can take it away from you."</p>
+                    <p class="quote-author">– B.B. King</p>
                 </div>
 
+                <!-- Study Tips -->
                 <div class="study-tips">
                     <h4><i class="fas fa-lightbulb"></i> Study Tips</h4>
                     <ul>
                         <li>Use the Pomodoro technique (25 min study, 5 min break)</li>
-                        <li>Set clear goals for each study session</li>
-                        <li>Take regular breaks to maintain focus</li>
-                        <li>Use ambient sounds to block distractions</li>
-                        <li>Review your tasks before starting</li>
+                        <li>Set clear, achievable goals for each session</li>
+                        <li>Take regular breaks to maintain focus and prevent burnout</li>
+                        <li>Use ambient sounds to create an optimal study environment</li>
+                        <li>Stay hydrated and maintain good posture</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Sidebar -->
+            <!-- Right Column: Sidebar -->
             <div class="sidebar">
                 <!-- Prayer Times -->
-                <div class="sidebar-card prayer-times">
-                    <h3 style="color: var(--secondary); margin-bottom: 1rem;">
-                        <i class="fas fa-mosque"></i> Prayer Times
-                    </h3>
+                <div class="card prayer-card">
+                    <div class="card-header">
+                        <i class="fas fa-mosque"></i>
+                        <h2>Prayer Times</h2>
+                    </div>
                     <iframe 
                         src="https://timesprayer.com/widgets.php?frame=1&lang=en&name=demlig&sound=true&avachang=true&fcolor=07056A&tcolor=404592&frcolor=00034E" 
-                        style="border: none; overflow: hidden; width: 100%; height: 191px;">
+                        style="border: none; overflow: hidden; width: 100%; height: 191px; border-radius: 8px;">
                     </iframe>
                 </div>
 
-                <!-- Pomodoro Timer -->
-                <div class="sidebar-card timer-section">
-                    <h3 style="color: var(--hacker-green); margin-bottom: 1rem;">
-                        <i class="fas fa-clock"></i> Pomodoro Timer
-                    </h3>
-                    <div class="pomodoro-timer">
-                        <div class="timer-display" id="timerDisplay">25:00</div>
-                        
-                        <div class="timer-modes">
-                            <button class="mode-btn active" onclick="setTimerMode('pomodoro')">Pomodoro</button>
-                            <button class="mode-btn" onclick="setTimerMode('shortBreak')">Short Break</button>
-                            <button class="mode-btn" onclick="setTimerMode('longBreak')">Long Break</button>
-                        </div>
-                        
-                        <div class="timer-controls">
-                            <button class="timer-btn" id="startBtn" onclick="startTimer()">
-                                <i class="fas fa-play"></i> Start
-                            </button>
-                            <button class="timer-btn" id="pauseBtn" onclick="pauseTimer()" style="display: none;">
-                                <i class="fas fa-pause"></i> Pause
-                            </button>
-                            <button class="timer-btn reset" onclick="resetTimer()">
-                                <i class="fas fa-redo"></i> Reset
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Task Manager -->
-                <div class="sidebar-card tasks-section">
-                    <h3 style="color: #00ff9d; margin-bottom: 1rem;">
-                        <i class="fas fa-tasks"></i> Study Tasks
-                    </h3>
+                <div class="card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <i class="fas fa-tasks"></i>
+                        <h2>Study Tasks</h2>
+                    </div>
                     
                     <div class="task-input">
                         <input type="text" id="taskInput" placeholder="Add a new task..." onkeypress="addTaskOnEnter(event)">
@@ -653,10 +845,10 @@
                     </div>
                     
                     <div class="task-list" id="taskList">
-                        <!-- Tasks will be added here -->
+                        <!-- Tasks will be loaded here -->
                     </div>
                     
-                    <div class="study-stats">
+                    <div class="task-stats">
                         <div class="stat-item">
                             <div class="stat-value" id="totalTasks">0</div>
                             <div class="stat-label">Total Tasks</div>
@@ -667,6 +859,22 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Quick Stats -->
+                <div class="card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h2>Today's Progress</h2>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem 0;">
+                        <div style="font-size: 3rem; font-weight: 300; color: var(--primary);" id="pomodorosCompleted">0</div>
+                        <div style="color: var(--gray); margin-top: 0.5rem;">Pomodoros Completed</div>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem 0; border-top: 2px solid var(--gray-light);">
+                        <div style="font-size: 3rem; font-weight: 300; color: var(--success);" id="studyTime">00:00</div>
+                        <div style="color: var(--gray); margin-top: 0.5rem;">Study Time</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -674,9 +882,9 @@
     <!-- Focus Mode Overlay -->
     <div class="focus-mode" id="focusMode">
         <div class="focus-timer" id="focusTimer">25:00</div>
-        <div class="focus-task" id="focusTask">Current Task: None</div>
+        <div class="focus-task" id="focusTask">Current Task: No active task</div>
         <button class="exit-focus" onclick="exitFocusMode()">
-            <i class="fas fa-times"></i> Exit Focus Mode
+            <i class="fas fa-times"></i> Exit Focus Mode (ESC)
         </button>
     </div>
 
@@ -686,6 +894,8 @@
         let timeLeft = 25 * 60; // 25 minutes in seconds
         let timerRunning = false;
         let currentMode = 'pomodoro';
+        let totalStudyTime = 0; // in seconds
+        let studyTimeInterval;
 
         // Timer Modes (in seconds)
         const timerModes = {
@@ -714,21 +924,23 @@
         const focusModeEl = document.getElementById('focusMode');
         const focusTimerEl = document.getElementById('focusTimer');
         const focusTaskEl = document.getElementById('focusTask');
+        const pomodorosCompletedEl = document.getElementById('pomodorosCompleted');
+        const studyTimeEl = document.getElementById('studyTime');
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             loadTasks();
             updateTaskStats();
             initializeAudio();
+            loadTimerState();
+            updateStudyTimeDisplay();
             
-            // Set initial timer display
-            updateTimerDisplay();
+            // Load completed pomodoros
+            const completedPomodoros = localStorage.getItem('pomodorosCompleted') || '0';
+            pomodorosCompletedEl.textContent = completedPomodoros;
             
-            // Load timer mode from localStorage
-            const savedMode = localStorage.getItem('timerMode');
-            if (savedMode && timerModes[savedMode]) {
-                setTimerMode(savedMode, false);
-            }
+            // Load total study time
+            totalStudyTime = parseInt(localStorage.getItem('totalStudyTime') || '0');
             
             // Update cursor blink
             const cursor = document.getElementById('cursor');
@@ -739,6 +951,9 @@
                     cursor.style.opacity = cursorVisible ? 1 : 0;
                 }, 500);
             }
+
+            // Start study time tracking
+            startStudyTimeTracking();
         });
 
         // Timer Functions
@@ -776,6 +991,11 @@
                         timerComplete();
                     }
                 }, 1000);
+                
+                // Track study time
+                if (currentMode === 'pomodoro') {
+                    startStudyTimeTracking();
+                }
             }
         }
 
@@ -784,6 +1004,9 @@
             clearInterval(timerInterval);
             startBtn.style.display = 'block';
             pauseBtn.style.display = 'none';
+            
+            // Pause study time tracking
+            stopStudyTimeTracking();
         }
 
         function resetTimer() {
@@ -817,14 +1040,18 @@
                 });
             }
             
-            // Auto-switch to next mode
+            // Update pomodoro count
             if (currentMode === 'pomodoro') {
-                // Count completed pomodoros
                 const completed = parseInt(localStorage.getItem('pomodorosCompleted') || '0');
                 localStorage.setItem('pomodorosCompleted', (completed + 1).toString());
-                
+                pomodorosCompletedEl.textContent = completed + 1;
+            }
+            
+            // Auto-switch to next mode
+            if (currentMode === 'pomodoro') {
                 // Every 4 pomodoros, take a long break
-                if ((completed + 1) % 4 === 0) {
+                const completed = parseInt(localStorage.getItem('pomodorosCompleted') || '0');
+                if (completed % 4 === 0) {
                     setTimerMode('longBreak');
                 } else {
                     setTimerMode('shortBreak');
@@ -834,6 +1061,30 @@
             }
             
             startTimer(); // Auto-start next timer
+        }
+
+        // Study Time Tracking
+        function startStudyTimeTracking() {
+            if (!studyTimeInterval) {
+                studyTimeInterval = setInterval(() => {
+                    totalStudyTime++;
+                    localStorage.setItem('totalStudyTime', totalStudyTime.toString());
+                    updateStudyTimeDisplay();
+                }, 1000);
+            }
+        }
+
+        function stopStudyTimeTracking() {
+            if (studyTimeInterval) {
+                clearInterval(studyTimeInterval);
+                studyTimeInterval = null;
+            }
+        }
+
+        function updateStudyTimeDisplay() {
+            const hours = Math.floor(totalStudyTime / 3600);
+            const minutes = Math.floor((totalStudyTime % 3600) / 60);
+            studyTimeEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
         }
 
         // Task Functions
@@ -882,7 +1133,7 @@
             taskList.innerHTML = '';
             
             if (tasks.length === 0) {
-                taskList.innerHTML = '<p style="text-align: center; color: var(--text-dim); padding: 1rem;">No tasks yet. Add one above!</p>';
+                taskList.innerHTML = '<p style="text-align: center; color: var(--gray); padding: 1rem;">No tasks yet. Add one above!</p>';
                 return;
             }
             
@@ -1053,29 +1304,51 @@
             }
         });
 
+        // Save/Load Timer State
+        function saveTimerState() {
+            localStorage.setItem('timerTimeLeft', timeLeft);
+            localStorage.setItem('timerRunning', timerRunning);
+            localStorage.setItem('currentMode', currentMode);
+        }
+
+        function loadTimerState() {
+            const savedTimeLeft = localStorage.getItem('timerTimeLeft');
+            const savedTimerRunning = localStorage.getItem('timerRunning');
+            const savedCurrentMode = localStorage.getItem('currentMode');
+            
+            if (savedTimeLeft && savedCurrentMode) {
+                timeLeft = parseInt(savedTimeLeft);
+                currentMode = savedCurrentMode;
+                setTimerMode(currentMode, false);
+                updateTimerDisplay();
+                
+                if (savedTimerRunning === 'true') {
+                    startTimer();
+                }
+            }
+        }
+
+        // Auto-save timer state
+        setInterval(saveTimerState, 5000);
+
         // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
         
         if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', () => {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                const isVisible = navLinks.style.display === 'flex';
+                navLinks.style.display = isVisible ? 'none' : 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '1rem';
+                navLinks.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
             });
         }
-
-        // Save timer state before leaving
-        window.addEventListener('beforeunload', function() {
-            localStorage.setItem('timerTimeLeft', timeLeft);
-            localStorage.setItem('timerRunning', timerRunning);
-            localStorage.setItem('currentMode', currentMode);
-        });
-
-        // Load timer state
-        const savedTimeLeft = localStorage.getItem('timerTimeLeft');
-        const savedTimerRunning = localStorage.getItem('timerRunning');
-        const savedCurrentMode = localStorage.getItem('currentMode');
-        
-        if (savedTimeLeft && savedCurrentMode) {
-            timeLeft = parseInt(savedTimeLeft);
-            currentMode = savedCurrentMode;
-            timerRunning
+    </script>
+</body>
+</html>
