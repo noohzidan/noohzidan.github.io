@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+     BUG BOUNTY WRITEUP TEMPLATE
+     How to use:
+     1. Save a copy of this file into /bugbounty/ as <slug>.html
+     2. Fill in <title>, the disclosure summary panel, and the prose
+     3. Add a matching entry to /assets/js/writeups-data.js so it
+        shows up on the homepage, bugbounty.html and writeups.html
+     4. Only publish after the program's disclosure window allows it
+     ============================================================ -->
+<title>Bug Bounty: Finding Title — ZINAD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<div class="scrim"></div>
+<div class="shell">
+
+  <aside class="sidebar">
+    <a href="../index.html" class="brand"><span class="dot"></span><div>ZINAD<small>SECURITY WRITEUPS</small></div></a>
+    <nav class="nav-section">
+      <div class="nav-label">Navigate</div>
+      <a href="../index.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+        Home
+      </a>
+      <a href="../writeups.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z"/></svg>
+        All Writeups
+      </a>
+      <a href="../htb.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.9v10.2L12 22l-9-4.9V6.9L12 2Z"/><path d="M12 22V12M21 6.9 12 12 3 6.9M16.5 4.4l-9 4.9"/></svg>
+        HTB Writeups
+      </a>
+      <a href="../bugbounty.html" class="nav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v3M12 19v3M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8M2 12h3M19 12h3"/><circle cx="12" cy="12" r="4"/></svg>
+        Bug Bounty
+      </a>
+      <a href="../about.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+        About
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://github.com/noohzidan" target="_blank" rel="noopener" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+      </a>
+      <a href="mailto:nnouh4967@gmail.com" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18v14H3V5Z"/><path d="m3 6 9 7 9-7"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="mobile-bar">
+      <button class="mobile-toggle" aria-label="Open menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <span class="brand" style="font-size:0.92rem;"><span class="dot"></span>ZINAD</span>
+      <span style="width:36px;"></span>
+    </div>
+
+    <div class="container">
+      <a href="../bugbounty.html" class="back-link">← Back to Bug Bounty writeups</a>
+
+      <div class="page-eyebrow">responsible disclosure</div>
+      <h1 class="page-title">Finding Title Goes Here</h1>
+      <p class="page-lede">
+        A short, sanitized description of the vulnerability and its impact — the same way
+        you'd open a disclosure report's executive summary.
+      </p>
+
+      <div class="article-tags">
+        <span class="tag">idor</span>
+        <span class="tag">api</span>
+        <span class="tag">broken-access-control</span>
+      </div>
+      <div class="article-meta">
+        <span>📅 Month DD, YYYY</span>
+        <span>⏱ ~8 min read</span>
+      </div>
+
+      <!-- DISCLOSURE SUMMARY PANEL -->
+      <div class="infocard">
+        <div class="infocard-head">
+          <h3>Disclosure Summary</h3>
+          <span class="chip chip-hard">High Severity</span>
+        </div>
+        <div class="infocard-grid">
+          <div class="infocard-cell"><div class="k">Program</div><div class="v">Platform / Private Program*</div></div>
+          <div class="infocard-cell"><div class="k">Vulnerability Class</div><div class="v">IDOR</div></div>
+          <div class="infocard-cell"><div class="k">CVSS</div><div class="v">7.5</div></div>
+          <div class="infocard-cell"><div class="k">Status</div><div class="v">Resolved</div></div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="label">Disclosure Note</span>
+        Program name, target domain, and identifying details are redacted or generalized in
+        line with the program's responsible disclosure policy. Only publish after written
+        permission or after the program's disclosure window has passed.
+      </div>
+
+      <article class="prose">
+
+        <h2 id="summary">Summary</h2>
+        <p>
+          Describe the application context, what the feature was supposed to do, and the
+          high-level impact of the bug — written so a non-technical reader could get the gist.
+        </p>
+
+        <h2 id="discovery">Discovery</h2>
+        <p>
+          Walk through how the endpoint or feature was found during recon/testing, and what
+          made it stand out as worth digging into.
+        </p>
+        <pre><code>GET /api/v1/invoices/10482 HTTP/1.1
+Authorization: Bearer &lt;victim_token&gt;</code></pre>
+
+        <h2 id="exploitation">Exploitation</h2>
+        <p>
+          Detail the proof-of-concept steps that demonstrate impact, kept reproducible but
+          without anything that could be misused outside a controlled disclosure context.
+        </p>
+
+        <h2 id="impact">Impact</h2>
+        <p>
+          State concretely what an attacker could access or do, and why it matters for the
+          business (data exposure, account takeover, financial impact, etc.).
+        </p>
+
+        <h2 id="remediation">Remediation</h2>
+        <p>
+          Summarize the fix recommended and, if known, what the vendor actually shipped.
+        </p>
+
+        <h2 id="timeline">Disclosure Timeline</h2>
+        <ul>
+          <li><strong>Day 0</strong> — Reported to program</li>
+          <li><strong>Day 2</strong> — Triaged, severity confirmed</li>
+          <li><strong>Day 14</strong> — Fix deployed</li>
+          <li><strong>Day 30</strong> — Public disclosure approved</li>
+        </ul>
+
+      </article>
+
+      <footer class="site-footer">
+        <span>© 2026 Nooh Ali Zidan</span>
+        <a href="../bugbounty.html">← All Bug Bounty writeups</a>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
