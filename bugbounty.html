@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bug Bounty Writeups — ZINAD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+<div class="scrim"></div>
+<div class="shell">
+
+  <aside class="sidebar">
+    <a href="index.html" class="brand"><span class="dot"></span><div>ZINAD<small>SECURITY WRITEUPS</small></div></a>
+
+    <nav class="nav-section">
+      <div class="nav-label">Navigate</div>
+      <a href="index.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+        Home
+      </a>
+      <a href="writeups.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15Z"/></svg>
+        All Writeups
+      </a>
+      <a href="htb.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4.9v10.2L12 22l-9-4.9V6.9L12 2Z"/><path d="M12 22V12M21 6.9 12 12 3 6.9M16.5 4.4l-9 4.9"/></svg>
+        HTB Writeups
+      </a>
+      <a href="bugbounty.html" class="nav-link active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v3M12 19v3M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8M2 12h3M19 12h3"/><circle cx="12" cy="12" r="4"/></svg>
+        Bug Bounty
+      </a>
+      <a href="about.html" class="nav-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+        About
+      </a>
+    </nav>
+
+    <nav class="nav-section">
+      <div class="nav-label">Top Tags</div>
+      <div class="sidebar-tags">
+        <a class="tag" href="writeups.html?tag=sqli">sqli</a>
+        <a class="tag" href="writeups.html?tag=idor">idor</a>
+        <a class="tag" href="writeups.html?tag=xss">xss</a>
+        <a class="tag" href="writeups.html?tag=privesc">privesc</a>
+        <a class="tag" href="writeups.html?tag=api">api</a>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="https://github.com/noohzidan" target="_blank" rel="noopener" title="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.65.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.35 4.81-4.58 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14ZM8.34 18V9.75H5.67V18h2.67Zm-1.33-9.4c.9 0 1.46-.6 1.46-1.34-.02-.76-.56-1.34-1.44-1.34-.89 0-1.47.58-1.47 1.34 0 .75.56 1.34 1.43 1.34h.02ZM18.34 18v-4.7c0-2.52-1.34-3.69-3.14-3.69-1.45 0-2.1.8-2.46 1.36v-1.22h-2.67c.04.75 0 8.25 0 8.25h2.67v-4.6c0-.25.02-.49.1-.67.2-.5.66-1.03 1.45-1.03 1.02 0 1.43.78 1.43 1.92V18h2.67Z"/></svg>
+      </a>
+      <a href="mailto:nnouh4967@gmail.com" title="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18v14H3V5Z"/><path d="m3 6 9 7 9-7"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="mobile-bar">
+      <button class="mobile-toggle" aria-label="Open menu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <span class="brand" style="font-size:0.92rem;"><span class="dot"></span>ZINAD</span>
+      <span style="width:36px;"></span>
+    </div>
+
+    <div class="container-wide">
+      <div class="page-eyebrow">responsible disclosure</div>
+      <h1 class="page-title">Bug bounty writeups</h1>
+      <p class="page-lede">Real-world findings from Standoff365, YesWeHack, and private programs — sanitized for public disclosure where required.</p>
+
+      <input type="text" class="filter-search" id="search" placeholder="Search findings, tags...">
+      <div class="filter-bar" id="tag-bar"></div>
+
+      <div class="writeup-grid" id="all-grid"></div>
+      <div class="filter-empty" id="empty-msg" style="display:none;">No findings match that search yet.</div>
+    </div>
+  </main>
+</div>
+
+<script src="assets/js/writeups-data.js"></script>
+<script src="assets/js/render-list.js"></script>
+<script>
+  renderWriteupList({
+    category: "bugbounty",
+    gridSelector: "#all-grid",
+    tagBarSelector: "#tag-bar",
+    searchSelector: "#search",
+    emptySelector: "#empty-msg"
+  });
+
+  // support ?tag=xxx deep links from sidebar
+  const urlTag = new URLSearchParams(window.location.search).get("tag");
+  if (urlTag) {
+    setTimeout(() => {
+      const btn = document.querySelector(`#tag-bar [data-tag="${urlTag}"]`);
+      if (btn) btn.click();
+    }, 0);
+  }
+</script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
